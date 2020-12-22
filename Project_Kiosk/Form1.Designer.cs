@@ -46,10 +46,6 @@ namespace Project_Kiosk
             this.Btn_juice3 = new System.Windows.Forms.Button();
             this.Btn_Tea1 = new System.Windows.Forms.Button();
             this.Panel_etc = new System.Windows.Forms.Panel();
-            this.Panel_bakery = new System.Windows.Forms.Panel();
-            this.Btn_bagel = new System.Windows.Forms.Button();
-            this.Btn_makarong = new System.Windows.Forms.Button();
-            this.Btn_honey = new System.Windows.Forms.Button();
             this.Btn_etc6 = new System.Windows.Forms.Button();
             this.Btn_shot = new System.Windows.Forms.Button();
             this.Btn_syrup = new System.Windows.Forms.Button();
@@ -59,16 +55,33 @@ namespace Project_Kiosk
             this.Btn_etc3 = new System.Windows.Forms.Button();
             this.Btn_etc2 = new System.Windows.Forms.Button();
             this.Btn_afogato = new System.Windows.Forms.Button();
+            this.Panel_bakery = new System.Windows.Forms.Panel();
+            this.Btn_bagel = new System.Windows.Forms.Button();
+            this.Btn_makarong = new System.Windows.Forms.Button();
+            this.Btn_honey = new System.Windows.Forms.Button();
             this.Btn_coffee = new System.Windows.Forms.Button();
             this.Btn_juice = new System.Windows.Forms.Button();
             this.Btn_etc = new System.Windows.Forms.Button();
             this.Btn_bakery = new System.Windows.Forms.Button();
             this.Btn_Cancel = new System.Windows.Forms.Button();
             this.Btn_Order = new System.Windows.Forms.Button();
+            this.Panel_add_c = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.Btn_cart = new System.Windows.Forms.Button();
+            this.Btn_back = new System.Windows.Forms.Button();
+            this.Btn_syrup3 = new System.Windows.Forms.Button();
+            this.Btn_syrup2 = new System.Windows.Forms.Button();
+            this.Btn_addsyrup = new System.Windows.Forms.Button();
+            this.Btn_hot = new System.Windows.Forms.Button();
+            this.Btn_ice = new System.Windows.Forms.Button();
+            this.Bnt_addshot = new System.Windows.Forms.Button();
+            this.count = new System.Windows.Forms.NumericUpDown();
             this.Panel_coffee.SuspendLayout();
             this.Panel_Juice.SuspendLayout();
             this.Panel_etc.SuspendLayout();
             this.Panel_bakery.SuspendLayout();
+            this.Panel_add_c.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.count)).BeginInit();
             this.SuspendLayout();
             // 
             // Panel_coffee
@@ -93,6 +106,7 @@ namespace Project_Kiosk
             this.Btn_vanila.TabIndex = 5;
             this.Btn_vanila.Text = "바닐라 라떼";
             this.Btn_vanila.UseVisualStyleBackColor = true;
+            this.Btn_vanila.Click += new System.EventHandler(this.Btn_CoffeeDetail_Click);
             // 
             // Btn_espresso
             // 
@@ -102,6 +116,7 @@ namespace Project_Kiosk
             this.Btn_espresso.TabIndex = 4;
             this.Btn_espresso.Text = "에스프레소";
             this.Btn_espresso.UseVisualStyleBackColor = true;
+            this.Btn_espresso.Click += new System.EventHandler(this.Btn_CoffeeDetail_Click);
             // 
             // Btn_cappuccino
             // 
@@ -111,6 +126,7 @@ namespace Project_Kiosk
             this.Btn_cappuccino.TabIndex = 3;
             this.Btn_cappuccino.Text = "카푸치노";
             this.Btn_cappuccino.UseVisualStyleBackColor = true;
+            this.Btn_cappuccino.Click += new System.EventHandler(this.Btn_CoffeeDetail_Click);
             // 
             // Btn_moca
             // 
@@ -120,6 +136,7 @@ namespace Project_Kiosk
             this.Btn_moca.TabIndex = 2;
             this.Btn_moca.Text = "카페모카";
             this.Btn_moca.UseVisualStyleBackColor = true;
+            this.Btn_moca.Click += new System.EventHandler(this.Btn_CoffeeDetail_Click);
             // 
             // Btn_latte
             // 
@@ -129,6 +146,7 @@ namespace Project_Kiosk
             this.Btn_latte.TabIndex = 1;
             this.Btn_latte.Text = "카페라떼";
             this.Btn_latte.UseVisualStyleBackColor = true;
+            this.Btn_latte.Click += new System.EventHandler(this.Btn_CoffeeDetail_Click);
             // 
             // Btn_Americano
             // 
@@ -138,6 +156,7 @@ namespace Project_Kiosk
             this.Btn_Americano.TabIndex = 0;
             this.Btn_Americano.Text = "아메리카노";
             this.Btn_Americano.UseVisualStyleBackColor = true;
+            this.Btn_Americano.Click += new System.EventHandler(this.Btn_CoffeeDetail_Click);
             // 
             // Panel_Juice
             // 
@@ -150,7 +169,7 @@ namespace Project_Kiosk
             this.Panel_Juice.Controls.Add(this.Btn_juice3);
             this.Panel_Juice.Controls.Add(this.Btn_Tea1);
             this.Panel_Juice.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.Panel_Juice.Location = new System.Drawing.Point(32, 42);
+            this.Panel_Juice.Location = new System.Drawing.Point(942, 488);
             this.Panel_Juice.Name = "Panel_Juice";
             this.Panel_Juice.Size = new System.Drawing.Size(360, 324);
             this.Panel_Juice.TabIndex = 7;
@@ -240,51 +259,11 @@ namespace Project_Kiosk
             this.Panel_etc.Controls.Add(this.Btn_etc2);
             this.Panel_etc.Controls.Add(this.Btn_afogato);
             this.Panel_etc.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.Panel_etc.Location = new System.Drawing.Point(32, 42);
+            this.Panel_etc.Location = new System.Drawing.Point(897, 158);
             this.Panel_etc.Name = "Panel_etc";
             this.Panel_etc.Size = new System.Drawing.Size(360, 324);
             this.Panel_etc.TabIndex = 15;
             this.Panel_etc.Visible = false;
-            // 
-            // Panel_bakery
-            // 
-            this.Panel_bakery.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.Panel_bakery.Controls.Add(this.Btn_bagel);
-            this.Panel_bakery.Controls.Add(this.Btn_makarong);
-            this.Panel_bakery.Controls.Add(this.Btn_honey);
-            this.Panel_bakery.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.Panel_bakery.Location = new System.Drawing.Point(32, 42);
-            this.Panel_bakery.Name = "Panel_bakery";
-            this.Panel_bakery.Size = new System.Drawing.Size(360, 324);
-            this.Panel_bakery.TabIndex = 16;
-            this.Panel_bakery.Visible = false;
-            // 
-            // Btn_bagel
-            // 
-            this.Btn_bagel.Location = new System.Drawing.Point(133, 23);
-            this.Btn_bagel.Name = "Btn_bagel";
-            this.Btn_bagel.Size = new System.Drawing.Size(86, 58);
-            this.Btn_bagel.TabIndex = 7;
-            this.Btn_bagel.Text = "베이글";
-            this.Btn_bagel.UseVisualStyleBackColor = true;
-            // 
-            // Btn_makarong
-            // 
-            this.Btn_makarong.Location = new System.Drawing.Point(18, 23);
-            this.Btn_makarong.Name = "Btn_makarong";
-            this.Btn_makarong.Size = new System.Drawing.Size(86, 58);
-            this.Btn_makarong.TabIndex = 8;
-            this.Btn_makarong.Text = "마카롱";
-            this.Btn_makarong.UseVisualStyleBackColor = true;
-            // 
-            // Btn_honey
-            // 
-            this.Btn_honey.Location = new System.Drawing.Point(247, 23);
-            this.Btn_honey.Name = "Btn_honey";
-            this.Btn_honey.Size = new System.Drawing.Size(86, 58);
-            this.Btn_honey.TabIndex = 9;
-            this.Btn_honey.Text = "허니브레드";
-            this.Btn_honey.UseVisualStyleBackColor = true;
             // 
             // Btn_etc6
             // 
@@ -367,6 +346,46 @@ namespace Project_Kiosk
             this.Btn_afogato.Text = "아포가토";
             this.Btn_afogato.UseVisualStyleBackColor = true;
             // 
+            // Panel_bakery
+            // 
+            this.Panel_bakery.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.Panel_bakery.Controls.Add(this.Btn_bagel);
+            this.Panel_bakery.Controls.Add(this.Btn_makarong);
+            this.Panel_bakery.Controls.Add(this.Btn_honey);
+            this.Panel_bakery.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.Panel_bakery.Location = new System.Drawing.Point(924, 42);
+            this.Panel_bakery.Name = "Panel_bakery";
+            this.Panel_bakery.Size = new System.Drawing.Size(360, 324);
+            this.Panel_bakery.TabIndex = 16;
+            this.Panel_bakery.Visible = false;
+            // 
+            // Btn_bagel
+            // 
+            this.Btn_bagel.Location = new System.Drawing.Point(133, 23);
+            this.Btn_bagel.Name = "Btn_bagel";
+            this.Btn_bagel.Size = new System.Drawing.Size(86, 58);
+            this.Btn_bagel.TabIndex = 7;
+            this.Btn_bagel.Text = "베이글";
+            this.Btn_bagel.UseVisualStyleBackColor = true;
+            // 
+            // Btn_makarong
+            // 
+            this.Btn_makarong.Location = new System.Drawing.Point(18, 23);
+            this.Btn_makarong.Name = "Btn_makarong";
+            this.Btn_makarong.Size = new System.Drawing.Size(86, 58);
+            this.Btn_makarong.TabIndex = 8;
+            this.Btn_makarong.Text = "마카롱";
+            this.Btn_makarong.UseVisualStyleBackColor = true;
+            // 
+            // Btn_honey
+            // 
+            this.Btn_honey.Location = new System.Drawing.Point(247, 23);
+            this.Btn_honey.Name = "Btn_honey";
+            this.Btn_honey.Size = new System.Drawing.Size(86, 58);
+            this.Btn_honey.TabIndex = 9;
+            this.Btn_honey.Text = "허니브레드";
+            this.Btn_honey.UseVisualStyleBackColor = true;
+            // 
             // Btn_coffee
             // 
             this.Btn_coffee.Location = new System.Drawing.Point(414, 42);
@@ -425,13 +444,141 @@ namespace Project_Kiosk
             this.Btn_Order.Text = "주문하기";
             this.Btn_Order.UseVisualStyleBackColor = true;
             // 
+            // Panel_add_c
+            // 
+            this.Panel_add_c.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.Panel_add_c.Controls.Add(this.count);
+            this.Panel_add_c.Controls.Add(this.label1);
+            this.Panel_add_c.Controls.Add(this.Btn_cart);
+            this.Panel_add_c.Controls.Add(this.Btn_back);
+            this.Panel_add_c.Controls.Add(this.Btn_syrup3);
+            this.Panel_add_c.Controls.Add(this.Btn_syrup2);
+            this.Panel_add_c.Controls.Add(this.Btn_addsyrup);
+            this.Panel_add_c.Controls.Add(this.Btn_hot);
+            this.Panel_add_c.Controls.Add(this.Btn_ice);
+            this.Panel_add_c.Controls.Add(this.Bnt_addshot);
+            this.Panel_add_c.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.Panel_add_c.Location = new System.Drawing.Point(523, 42);
+            this.Panel_add_c.Name = "Panel_add_c";
+            this.Panel_add_c.Size = new System.Drawing.Size(360, 417);
+            this.Panel_add_c.TabIndex = 17;
+            this.Panel_add_c.Visible = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("휴먼둥근헤드라인", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label1.Location = new System.Drawing.Point(55, 31);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(93, 22);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "label1";
+            // 
+            // Btn_cart
+            // 
+            this.Btn_cart.Location = new System.Drawing.Point(205, 342);
+            this.Btn_cart.Name = "Btn_cart";
+            this.Btn_cart.Size = new System.Drawing.Size(155, 68);
+            this.Btn_cart.TabIndex = 14;
+            this.Btn_cart.Text = "주문담기";
+            this.Btn_cart.UseVisualStyleBackColor = true;
+            // 
+            // Btn_back
+            // 
+            this.Btn_back.Location = new System.Drawing.Point(0, 342);
+            this.Btn_back.Name = "Btn_back";
+            this.Btn_back.Size = new System.Drawing.Size(155, 68);
+            this.Btn_back.TabIndex = 13;
+            this.Btn_back.Text = "취소하기";
+            this.Btn_back.UseVisualStyleBackColor = true;
+            this.Btn_back.Click += new System.EventHandler(this.Btn_back_Click);
+            // 
+            // Btn_syrup3
+            // 
+            this.Btn_syrup3.Location = new System.Drawing.Point(247, 153);
+            this.Btn_syrup3.Name = "Btn_syrup3";
+            this.Btn_syrup3.Size = new System.Drawing.Size(86, 58);
+            this.Btn_syrup3.TabIndex = 12;
+            this.Btn_syrup3.Text = "헤이즐넛시럽 추가";
+            this.Btn_syrup3.UseVisualStyleBackColor = true;
+            this.Btn_syrup3.Click += new System.EventHandler(this.Btn_coffeeOption_Click);
+            // 
+            // Btn_syrup2
+            // 
+            this.Btn_syrup2.Location = new System.Drawing.Point(133, 153);
+            this.Btn_syrup2.Name = "Btn_syrup2";
+            this.Btn_syrup2.Size = new System.Drawing.Size(86, 58);
+            this.Btn_syrup2.TabIndex = 11;
+            this.Btn_syrup2.Text = "바닐라시럽 추가";
+            this.Btn_syrup2.UseVisualStyleBackColor = true;
+            this.Btn_syrup2.Click += new System.EventHandler(this.Btn_coffeeOption_Click);
+            // 
+            // Btn_addsyrup
+            // 
+            this.Btn_addsyrup.Location = new System.Drawing.Point(18, 153);
+            this.Btn_addsyrup.Name = "Btn_addsyrup";
+            this.Btn_addsyrup.Size = new System.Drawing.Size(86, 58);
+            this.Btn_addsyrup.TabIndex = 10;
+            this.Btn_addsyrup.Text = "시럽 추가";
+            this.Btn_addsyrup.UseVisualStyleBackColor = true;
+            this.Btn_addsyrup.Click += new System.EventHandler(this.Btn_coffeeOption_Click);
+            // 
+            // Btn_hot
+            // 
+            this.Btn_hot.Location = new System.Drawing.Point(133, 75);
+            this.Btn_hot.Name = "Btn_hot";
+            this.Btn_hot.Size = new System.Drawing.Size(86, 58);
+            this.Btn_hot.TabIndex = 7;
+            this.Btn_hot.Text = "HOT";
+            this.Btn_hot.UseVisualStyleBackColor = true;
+            this.Btn_hot.Click += new System.EventHandler(this.Btn_coffeeOption_Click);
+            // 
+            // Btn_ice
+            // 
+            this.Btn_ice.Location = new System.Drawing.Point(18, 75);
+            this.Btn_ice.Name = "Btn_ice";
+            this.Btn_ice.Size = new System.Drawing.Size(86, 58);
+            this.Btn_ice.TabIndex = 8;
+            this.Btn_ice.Text = "ICE";
+            this.Btn_ice.UseVisualStyleBackColor = true;
+            this.Btn_ice.Click += new System.EventHandler(this.Btn_coffeeOption_Click);
+            // 
+            // Bnt_addshot
+            // 
+            this.Bnt_addshot.Location = new System.Drawing.Point(247, 75);
+            this.Bnt_addshot.Name = "Bnt_addshot";
+            this.Bnt_addshot.Size = new System.Drawing.Size(86, 58);
+            this.Bnt_addshot.TabIndex = 9;
+            this.Bnt_addshot.Text = "샷추가";
+            this.Bnt_addshot.UseVisualStyleBackColor = true;
+            this.Bnt_addshot.Click += new System.EventHandler(this.Btn_coffeeOption_Click);
+            // 
+            // count
+            // 
+            this.count.Cursor = System.Windows.Forms.Cursors.Default;
+            this.count.Location = new System.Drawing.Point(246, 31);
+            this.count.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.count.Name = "count";
+            this.count.Size = new System.Drawing.Size(87, 21);
+            this.count.TabIndex = 16;
+            this.count.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.ClientSize = new System.Drawing.Size(995, 531);
+            this.ClientSize = new System.Drawing.Size(1327, 531);
             this.Controls.Add(this.Panel_bakery);
+            this.Controls.Add(this.Panel_add_c);
             this.Controls.Add(this.Panel_etc);
             this.Controls.Add(this.Panel_Juice);
             this.Controls.Add(this.Btn_Order);
@@ -447,6 +594,9 @@ namespace Project_Kiosk
             this.Panel_Juice.ResumeLayout(false);
             this.Panel_etc.ResumeLayout(false);
             this.Panel_bakery.ResumeLayout(false);
+            this.Panel_add_c.ResumeLayout(false);
+            this.Panel_add_c.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.count)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -489,6 +639,17 @@ namespace Project_Kiosk
         private System.Windows.Forms.Button Btn_bagel;
         private System.Windows.Forms.Button Btn_makarong;
         private System.Windows.Forms.Button Btn_honey;
+        private System.Windows.Forms.Panel Panel_add_c;
+        private System.Windows.Forms.Button Btn_hot;
+        private System.Windows.Forms.Button Btn_ice;
+        private System.Windows.Forms.Button Bnt_addshot;
+        private System.Windows.Forms.Button Btn_cart;
+        private System.Windows.Forms.Button Btn_back;
+        private System.Windows.Forms.Button Btn_syrup3;
+        private System.Windows.Forms.Button Btn_syrup2;
+        private System.Windows.Forms.Button Btn_addsyrup;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.NumericUpDown count;
     }
 }
 
