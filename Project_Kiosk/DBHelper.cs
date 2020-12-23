@@ -11,10 +11,10 @@ namespace Project_Kiosk
     class DBHelper
     {
         //커넥션 객체 
-        private static SqlConnection conn = null;
+        public static SqlConnection conn = null;
         public static string DBConnString { get; private set; }
         public static bool bDBConnCheck = false;
-        private static int errorBoxCount = 0;
+        public static int errorBoxCount = 0;
 
         //생성자 
         public DBHelper() { }

@@ -66,6 +66,7 @@ namespace Project_Kiosk
             this.Btn_Cancel = new System.Windows.Forms.Button();
             this.Btn_Order = new System.Windows.Forms.Button();
             this.Panel_add_c = new System.Windows.Forms.Panel();
+            this.count = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.Btn_cart = new System.Windows.Forms.Button();
             this.Btn_back = new System.Windows.Forms.Button();
@@ -75,7 +76,6 @@ namespace Project_Kiosk
             this.Btn_hot = new System.Windows.Forms.Button();
             this.Btn_ice = new System.Windows.Forms.Button();
             this.Bnt_addshot = new System.Windows.Forms.Button();
-            this.count = new System.Windows.Forms.NumericUpDown();
             this.Panel_coffee.SuspendLayout();
             this.Panel_Juice.SuspendLayout();
             this.Panel_etc.SuspendLayout();
@@ -432,8 +432,9 @@ namespace Project_Kiosk
             this.Btn_Cancel.Name = "Btn_Cancel";
             this.Btn_Cancel.Size = new System.Drawing.Size(155, 68);
             this.Btn_Cancel.TabIndex = 5;
-            this.Btn_Cancel.Text = "취소하기";
+            this.Btn_Cancel.Text = "주문 취소하기";
             this.Btn_Cancel.UseVisualStyleBackColor = true;
+            this.Btn_Cancel.Click += new System.EventHandler(this.Btn_Cancel_Click);
             // 
             // Btn_Order
             // 
@@ -464,6 +465,25 @@ namespace Project_Kiosk
             this.Panel_add_c.TabIndex = 17;
             this.Panel_add_c.Visible = false;
             // 
+            // count
+            // 
+            this.count.Cursor = System.Windows.Forms.Cursors.Default;
+            this.count.Location = new System.Drawing.Point(246, 31);
+            this.count.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.count.Name = "count";
+            this.count.Size = new System.Drawing.Size(87, 21);
+            this.count.TabIndex = 16;
+            this.count.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.count.ValueChanged += new System.EventHandler(this.count_ValueChanged);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -482,6 +502,7 @@ namespace Project_Kiosk
             this.Btn_cart.TabIndex = 14;
             this.Btn_cart.Text = "주문담기";
             this.Btn_cart.UseVisualStyleBackColor = true;
+            this.Btn_cart.Click += new System.EventHandler(this.Btn_cart_Click);
             // 
             // Btn_back
             // 
@@ -489,7 +510,7 @@ namespace Project_Kiosk
             this.Btn_back.Name = "Btn_back";
             this.Btn_back.Size = new System.Drawing.Size(155, 68);
             this.Btn_back.TabIndex = 13;
-            this.Btn_back.Text = "취소하기";
+            this.Btn_back.Text = "돌아가기";
             this.Btn_back.UseVisualStyleBackColor = true;
             this.Btn_back.Click += new System.EventHandler(this.Btn_back_Click);
             // 
@@ -531,7 +552,7 @@ namespace Project_Kiosk
             this.Btn_hot.TabIndex = 7;
             this.Btn_hot.Text = "HOT";
             this.Btn_hot.UseVisualStyleBackColor = true;
-            this.Btn_hot.Click += new System.EventHandler(this.Btn_coffeeOption_Click);
+            this.Btn_hot.Click += new System.EventHandler(this.Btn_IceHot_Click);
             // 
             // Btn_ice
             // 
@@ -541,7 +562,7 @@ namespace Project_Kiosk
             this.Btn_ice.TabIndex = 8;
             this.Btn_ice.Text = "ICE";
             this.Btn_ice.UseVisualStyleBackColor = true;
-            this.Btn_ice.Click += new System.EventHandler(this.Btn_coffeeOption_Click);
+            this.Btn_ice.Click += new System.EventHandler(this.Btn_IceHot_Click);
             // 
             // Bnt_addshot
             // 
@@ -552,24 +573,6 @@ namespace Project_Kiosk
             this.Bnt_addshot.Text = "샷추가";
             this.Bnt_addshot.UseVisualStyleBackColor = true;
             this.Bnt_addshot.Click += new System.EventHandler(this.Btn_coffeeOption_Click);
-            // 
-            // count
-            // 
-            this.count.Cursor = System.Windows.Forms.Cursors.Default;
-            this.count.Location = new System.Drawing.Point(246, 31);
-            this.count.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.count.Name = "count";
-            this.count.Size = new System.Drawing.Size(87, 21);
-            this.count.TabIndex = 16;
-            this.count.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             // 
             // Form1
             // 

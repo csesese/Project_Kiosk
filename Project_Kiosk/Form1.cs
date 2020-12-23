@@ -14,8 +14,11 @@ namespace Project_Kiosk
     public partial class Form1 : Form
     {
 
-        string Menu;
-        string Option;
+        string Menu;//선택 메뉴
+        string Option;//옵션 선택
+        int surang;//수량 체크
+        string str;
+        string IceHot;
 
         public Form1()
         {
@@ -99,6 +102,10 @@ namespace Project_Kiosk
 
             label1.Text = Menu;
         }
+
+        //------------------------------------------------------------
+        #region 상품담기
+
         //커피메뉴 ->선택옵션 -> 취소하기 하기 선택옵션 panel 사라짐
         private void Btn_back_Click(object sender, EventArgs e)
         {            
@@ -108,9 +115,84 @@ namespace Project_Kiosk
         //커피 ->옵션 선택 
         private void Btn_coffeeOption_Click(object sender, EventArgs e)
         {
+            
             Button Abtn = sender as Button;
-            this.Option = Abtn.Text;
-            MessageBox.Show(Menu + "," + Option);
+
+            if (Option==null) 
+            {                
+                str = Abtn.Text;            
+            }
+            else
+            {
+                this.str = str + "+" + Abtn.Text;
+                MessageBox.Show(str);
+            }            
+            this.Option = str;            
+        }
+        //Ice or Hot
+        private void Btn_IceHot_Click(object sender, EventArgs e)
+        {
+            Button ihbtn = sender as Button;
+            IceHot = ihbtn.Text;
+        }
+        
+
+        //수량 체크 
+        private void count_ValueChanged(object sender, EventArgs e)
+        {
+            NumericUpDown count = sender as NumericUpDown;
+            decimal c = count.Value;
+            this.surang = Convert.ToInt32(c);
+          
+        }
+
+        //주문담기
+        private void Btn_cart_Click(object sender, EventArgs e)
+        {
+            String connectingString = "server=127.0.0.1,1433; uid=dzicube; pwd=ejwhs123$; database=kioskData;";
+
+            SqlConnection sqlConn = new SqlConnection(connectingString);
+            SqlCommand sqlComm = new SqlCommand();
+            sqlComm.Connection = sqlConn;
+            sqlComm.CommandText = "insert into Cart(menu_ID,count,menu_option,IceHot) values (@param1,@param2,@param3,@param4)";
+
+
+            MessageBox.Show(Menu + "," + Option + "/" + surang);
+            if (Option == null)
+            {
+                Option = "선택사항 없음";
+            }
+
+            sqlComm.Parameters.AddWithValue("@param1", Menu);
+            sqlComm.Parameters.AddWithValue("@param2", surang);
+            sqlComm.Parameters.AddWithValue("@param3", Option);
+            sqlComm.Parameters.AddWithValue("@param4", IceHot);
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
+
+
+            //주문담기 후 수량 초기화
+            count.Value = 1;
+            Option = null;            
+
+        }
+
+        #endregion
+
+        //주문 전체 쥐소하기(메인 화면)
+        private void Btn_Cancel_Click(object sender, EventArgs e)
+        {
+            String connectingString = "server=127.0.0.1,1433; uid=dzicube; pwd=ejwhs123$; database=kioskData;";
+
+            SqlConnection sqlConn = new SqlConnection(connectingString);
+            SqlCommand sqlComm = new SqlCommand();
+            sqlComm.Connection = sqlConn;
+            sqlComm.CommandText = "delete from Cart";
+
+            sqlConn.Open();
+            sqlComm.ExecuteNonQuery();
+            sqlConn.Close();
         }
 
 
