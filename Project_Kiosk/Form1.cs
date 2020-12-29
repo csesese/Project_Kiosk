@@ -422,24 +422,37 @@ namespace Project_Kiosk
             
 
             //2 변경된 숫자 확인
-            string cha_gaesu = dataGridView1.CurrentRow.Cells["개수"].Value.ToString();
-            int changed_gaesu = Convert.ToInt32(cha_gaesu);
+            string selected_gaesu = dataGridView1.CurrentRow.Cells["개수"].Value.ToString();
+            int changed_gaesu = Convert.ToInt32(selected_gaesu);
 
             //3 선택한 행의 가격 확인
             string selected_price = dataGridView1.CurrentRow.Cells["가격"].Value.ToString();
             int changed_price = Convert.ToInt32(selected_price);
-            MessageBox.Show("원래" + gaesu + " / 변경" +changed_gaesu+"/가격 "+ selected_price);
+
+            MessageBox.Show("원래" + gaesu + " / 변경" +changed_gaesu+"/가격 "+ gagaek);
 
             //4 계산 : 변경된 개수에 맞는 가격
             int sum = (gagaek / gaesu) * changed_gaesu;
-            int minus_price = changed_price - sum; // 가격 차액
+            int minus_price = gagaek - sum; // 가격 차액
 
-            this.total_price = total_price - minus_price;
-            Total_price_label.Text = total_price.ToString() + " 원";
+            int tp = total_price - minus_price;            
 
 
             //5 db변경 
             dataGridView1.CurrentRow.Cells[5].Value = sum;
+
+            string sql2 = "update Cart set count = @param1, each_price = @param2 where card_Serial = @param3";
+
+            SqlCommand sqlComm2 = new SqlCommand(sql2, DBHelper.conn);
+            sqlComm2.Parameters.AddWithValue("@param1", changed_gaesu);
+            sqlComm2.Parameters.AddWithValue("@param2", sum);
+            sqlComm2.Parameters.AddWithValue("@param3", selected);
+
+            sqlComm2.ExecuteNonQuery();
+
+            //최종 가격 변경 
+            this.total_price = total_sum();
+            Total_price_label.Text = total_price.ToString() + " 원";
         }
 
 
