@@ -224,7 +224,7 @@ namespace Project_Kiosk
         //END-------------------------------------------------
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++
-        #region 상품담기(옵션)
+        #region 주문담기(옵션)
 
         //돌아가기         
         private void Btn_back_Click(object sender, EventArgs e)
@@ -266,7 +266,6 @@ namespace Project_Kiosk
             if (surang == 0)
             {
                 surang = 1;
-
             }
 
             int sum = ((main_price + option_price) * surang);
@@ -311,11 +310,8 @@ namespace Project_Kiosk
             Total_price_label.Text = total_price.ToString() + " 원";
 
             dataGridView1.RowHeadersVisible = false; //첫 열 지우기     
-
-           
+                       
         }
-
-
         #endregion
         //END-------------------------------------------------
 
@@ -394,8 +390,7 @@ namespace Project_Kiosk
         private void Btn_cart_modify_Click(object sender, EventArgs e)
         {
             //1 선택한 행의 card_serial no 에 원래 개수 저장
-            string selected = dataGridView1.CurrentRow.Cells["No"].Value.ToString();
-            int ss = Convert.ToInt32(selected);
+            string selected = dataGridView1.CurrentRow.Cells["No"].Value.ToString();            
             int gaesu = 0;
             int gagaek = 0;
 
@@ -421,24 +416,16 @@ namespace Project_Kiosk
             reader.Close();
             
 
-            //2 변경된 숫자 확인
+            //2 변경된 개수 확인
             string selected_gaesu = dataGridView1.CurrentRow.Cells["개수"].Value.ToString();
             int changed_gaesu = Convert.ToInt32(selected_gaesu);
 
-            //3 선택한 행의 가격 확인
-            string selected_price = dataGridView1.CurrentRow.Cells["가격"].Value.ToString();
-            int changed_price = Convert.ToInt32(selected_price);
-
             MessageBox.Show("원래" + gaesu + " / 변경" +changed_gaesu+"/가격 "+ gagaek);
 
-            //4 계산 : 변경된 개수에 맞는 가격
-            int sum = (gagaek / gaesu) * changed_gaesu;
-            int minus_price = gagaek - sum; // 가격 차액
-
-            int tp = total_price - minus_price;            
-
-
-            //5 db변경 
+            //3 계산 : 변경된 개수에 맞는 가격
+            int sum = (gagaek / gaesu) * changed_gaesu;            
+            
+            //4 db변경 
             dataGridView1.CurrentRow.Cells[5].Value = sum;
 
             string sql2 = "update Cart set count = @param1, each_price = @param2 where card_Serial = @param3";
@@ -453,6 +440,12 @@ namespace Project_Kiosk
             //최종 가격 변경 
             this.total_price = total_sum();
             Total_price_label.Text = total_price.ToString() + " 원";
+        }
+
+        //Pay 
+        private void Btn_pay_Card_Click(object sender, EventArgs e)
+        {
+
         }
 
 
