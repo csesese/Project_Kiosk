@@ -12,6 +12,7 @@ namespace Project_Kiosk
     {
         //커넥션 객체 
         public static SqlConnection conn = null;
+       
         public static string DBConnString { get; private set; }
         public static bool bDBConnCheck = false;
         public static int errorBoxCount = 0;

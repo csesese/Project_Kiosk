@@ -9,12 +9,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace Project_Kiosk
 {
     public partial class Form1 : Form
-    {
-        static String connectingString = "server=127.0.0.1,1433; uid=dzicube; pwd=ejwhs123$; database=kioskData;";
-
+    {     
         string Menu;//선택 메뉴
         string Option;//옵션 선택
         int surang;//수량 체크
@@ -39,22 +38,18 @@ namespace Project_Kiosk
                     if (!DBHelper.IsDBConnected)
                     {
                         MessageBox.Show("DB 연결불가 , DB를 확인하세요.");
+                        
                         return;
                     }
                     else
                     {
-                        MessageBox.Show("DB 연결이 되었습니다.");
-
-                        DBHelper.Close();
-
-                        MessageBox.Show("DB 연결을 끊었습니다.");
+                        MessageBox.Show("DB 연결이 되었습니다.");                        
                     }
                 }
             }
             catch (ArgumentNullException ane)
             {
                 MessageBox.Show(ane.Message, "DataGridView_Load Error");
-
             }
         }
 
@@ -95,12 +90,10 @@ namespace Project_Kiosk
            
             string sql = "select  cast(price as int) as price from Menu where menu = @param1 ";
 
-            SqlConnection sqlConn = new SqlConnection(connectingString);
-            SqlCommand sqlComm = new SqlCommand(sql,sqlConn);     
+            SqlCommand sqlComm = new SqlCommand(sql,DBHelper.conn);     
             
             sqlComm.Parameters.AddWithValue("@param1", menu_price_Name);
-
-            sqlConn.Open();
+            
             SqlDataReader reader = sqlComm.ExecuteReader();
 
             while (reader.Read())
@@ -112,15 +105,54 @@ namespace Project_Kiosk
                 
                 //MessageBox.Show("선택 가격:" + each_price +"/메인가격  :" +main_price+" /옵션가격: "+option_price);
 
-            }
-            
-            reader.Close();
-            sqlConn.Close();
+            }            
+            reader.Close();            
             return each_price; //click 한 메뉴 가격 
 
         }
 
-        //-----------------------------------------------------------------
+        //공통메서드 : 최종 가격 
+        public int total_sum()
+        {
+            string sql = "select sum(each_price) as total_price from Cart";
+
+            SqlCommand sqlComm = new SqlCommand(sql, DBHelper.conn);            
+
+            SqlDataReader reader = sqlComm.ExecuteReader();
+
+            while (reader.Read())
+            {
+
+                string p = reader["total_price"].ToString();
+
+                this.total_price = Convert.ToInt32(p);
+
+                //MessageBox.Show("선택 가격:" + each_price +"/메인가격  :" +main_price+" /옵션가격: "+option_price);
+
+            }
+            reader.Close();
+            return total_price; //click 한 메뉴 가격 
+        }
+
+        //주문 전체 취소 
+        private void Btn_Cancel_Click(object sender, EventArgs e)
+        {
+            string sql = "delete from Cart";
+
+            SqlCommand sqlComm = new SqlCommand(sql, DBHelper.conn);
+
+            sqlComm.ExecuteNonQuery();
+            MessageBox.Show("주문이 전체 취소 되었습니다.");
+
+            total_price = 0;
+            each_price = 0;
+            main_price = 0;
+            option_price = 0;
+
+        }
+        
+
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++
         #region 메인메뉴 선택 btn_click
         //1.메인메뉴 선택-> 선택옵션 panel뜸
         private void mainMenu_Click(object sender, EventArgs e)
@@ -132,10 +164,10 @@ namespace Project_Kiosk
             this.menu_price_Name = Menu;
 
             Panel_add.Visible = true;
+            Panel_add.BringToFront();
             Panel_add_c.Visible = false;
             Panel_add_j.Visible = false;
             Panel_add_t.Visible = false;
-
 
 
             switch(Mbtn.Text)
@@ -191,9 +223,9 @@ namespace Project_Kiosk
         }
 
         #endregion
-        //-----------------------------------------------------------
+        //END-------------------------------------------------
 
-        //------------------------------------------------------------
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++
         #region 상품담기(옵션)
 
         //돌아가기         
@@ -224,8 +256,8 @@ namespace Project_Kiosk
         {
             
             string sql = "insert into Cart(menu_ID,count,menu_option,IceHot,each_price) values (@param1,@param2,@param3,@param4,@param5)";
-            SqlConnection sqlConn = new SqlConnection(connectingString);
-            SqlCommand sqlComm = new SqlCommand(sql,sqlConn);
+          
+            SqlCommand sqlComm = new SqlCommand(sql,DBHelper.conn);
             
 
             MessageBox.Show(Menu + "," + Option + "/" + surang);
@@ -246,12 +278,10 @@ namespace Project_Kiosk
             sqlComm.Parameters.AddWithValue("@param3", Option);
             sqlComm.Parameters.AddWithValue("@param4", IceHot);
             sqlComm.Parameters.AddWithValue("@param5", sum);
-            sqlConn.Open();
-            sqlComm.ExecuteNonQuery();
-            sqlConn.Close();
+           
+            sqlComm.ExecuteNonQuery();           
 
-            this.total_price += sum;
-            Label_Price.Text = "가격:" + total_price.ToString();
+            this.total_price += sum;            
 
             //주문담기 후 수량 초기화
             count.Value = 1;
@@ -261,23 +291,37 @@ namespace Project_Kiosk
             main_price = 0;
             option_price = 0;
 
+
+            //---------장부구니 list 보여주기-------------
+            DataTable table = null;
+
+            SqlDataAdapter adapter = new SqlDataAdapter(
+                "select c.card_Serial as No , c.IceHot as Type, c.menu_ID as 메뉴, c.menu_option as 선택사항 , c.count as 개수, c.each_price as 가격 from Cart c left outer join Menu m on c.menu_ID = m.menu ", DBHelper.DBConn);
+            table = new DataTable();
+
+            adapter.Fill(table);
+            dataGridView1.DataSource = table;
+
+            dataGridView1.Columns[0].ReadOnly = true;
+            dataGridView1.Columns[1].ReadOnly = true;
+            dataGridView1.Columns[2].ReadOnly = true;
+            dataGridView1.Columns[3].ReadOnly = true;
+            dataGridView1.Columns[5].ReadOnly = true;
+
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            
+            Total_price_label.Text = total_price.ToString() + " 원";
+
+            dataGridView1.RowHeadersVisible = false; //첫 열 지우기     
+
+           
         }
 
-
-        //선택 옵션 사항 "선택취소" 하기
-        private void Btn_optionCancel_Click(object sender, EventArgs e)
-        {
-            Option = null;
-            option_name.Text = "+";
-
-            option_price = 0;
-
-
-        }
 
         #endregion
-        //------------------------------------------------------
+        //END-------------------------------------------------
 
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++
         #region OPTION 선택
         //2.옵션 선택 
         private void Btn_coffeeOption_Click(object sender, EventArgs e)
@@ -307,57 +351,56 @@ namespace Project_Kiosk
             Button ihbtn = sender as Button;
             IceHot = ihbtn.Text;
         }
-        #endregion
-        //----------------------------------------------------------
 
-        
-        #region 메인 화면 : 전체 주문 최소 & 최종 주문하기 
-        private void Btn_Cancel_Click(object sender, EventArgs e)
+        //선택 옵션 사항 "선택취소" 하기
+        private void Btn_optionCancel_Click(object sender, EventArgs e)
         {
-            string sql = "delete from Cart";
-            
-            SqlConnection sqlConn = new SqlConnection(connectingString);
-            SqlCommand sqlComm = new SqlCommand(sql, sqlConn);
-            sqlConn.Open();
+            Option = null;
+            option_name.Text = "+";
+
+            option_price = 0;
+
+        }
+        #endregion
+        //END-------------------------------------------------
+
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++
+        #region 장바구니 : 취소 & 수정 
+        //장바구니 에서 취소하기 
+        private void Btn_cart_cancel_Click(object sender, EventArgs e)
+        {
+            if(dataGridView1.SelectedRows.Count==0)
+            {
+                return;
+            }
+
+            string selected = dataGridView1.CurrentRow.Cells["No"].Value.ToString();           
+
+            string sql = "delete from Cart where card_Serial= @param2";
+
+            SqlCommand sqlComm = new SqlCommand(sql, DBHelper.conn);
+            sqlComm.Parameters.AddWithValue("@param2", selected);
+
             sqlComm.ExecuteNonQuery();
-            sqlConn.Close();
 
-            MessageBox.Show("주문이 전체 취소 되었습니다.");
-
-            total_price = 0;
-            each_price = 0;
-            main_price = 0;
-            option_price = 0;
-
+            foreach (DataGridViewRow dgr in dataGridView1.SelectedRows)
+            {
+                dataGridView1.Rows.Remove(dgr);
+            }
+            //최종 가격 변경 
+            this.total_price = total_sum();
+            Total_price_label.Text = total_price.ToString() + " 원";
 
         }
-
-        private void Btn_Order_Click(object sender, EventArgs e)
+        //장바구니에서 개수 변경 하기
+        private void Btn_cart_modify_Click(object sender, EventArgs e)
         {
-            DataTable table = null;
-
-            SqlDataAdapter adapter = new SqlDataAdapter(
-                "select c.IceHot as Type, c.menu_ID, c.menu_option , c.count , c.each_price from Cart c left outer join Menu m on c.menu_ID = m.menu ", DBHelper.DBConn);
-            table = new DataTable();
-
-            adapter.Fill(table);
-            dataGridView1.DataSource = table;
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            Total_price_label.Text= total_price.ToString()+" 원";
-            Label_Price.Text = "가격:";
-
-            total_price = 0;
-            each_price = 0;
-            main_price = 0;
-            option_price = 0;
-
-            
-
 
         }
+
 
         #endregion
-        //----------------------------------------------------------
+        //END-------------------------------------------------
 
 
     }

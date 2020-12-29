@@ -64,7 +64,6 @@ namespace Project_Kiosk
             this.Btn_etc = new System.Windows.Forms.Button();
             this.Btn_bakery = new System.Windows.Forms.Button();
             this.Btn_Cancel = new System.Windows.Forms.Button();
-            this.Btn_Order = new System.Windows.Forms.Button();
             this.Panel_add = new System.Windows.Forms.Panel();
             this.Panel_add_t = new System.Windows.Forms.Panel();
             this.Btn_tea_hot = new System.Windows.Forms.Button();
@@ -85,14 +84,13 @@ namespace Project_Kiosk
             this.Btn_cart = new System.Windows.Forms.Button();
             this.Btn_back = new System.Windows.Forms.Button();
             this.Main = new System.Windows.Forms.Panel();
-            this.Label_Price = new System.Windows.Forms.Label();
             this.Panel_order = new System.Windows.Forms.Panel();
+            this.Btn_pay_Card = new System.Windows.Forms.Button();
             this.Total_price_label = new System.Windows.Forms.Label();
             this.total_Price = new System.Windows.Forms.Label();
             this.OrderList = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Btn_pay_Cash = new System.Windows.Forms.Button();
-            this.Btn_pay_Card = new System.Windows.Forms.Button();
+            this.Btn_cart_cancel = new System.Windows.Forms.Button();
             this.Panel_coffee.SuspendLayout();
             this.Panel_Juice.SuspendLayout();
             this.Panel_etc.SuspendLayout();
@@ -106,6 +104,26 @@ namespace Project_Kiosk
             this.Panel_order.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
+
+            // 
+            // Main
+            // 
+            this.Main.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.Main.Controls.Add(this.Panel_add);
+            this.Main.Controls.Add(this.Panel_bakery);
+            this.Main.Controls.Add(this.Panel_etc);
+            this.Main.Controls.Add(this.Panel_Juice);
+            this.Main.Controls.Add(this.Btn_bakery);
+            this.Main.Controls.Add(this.Btn_etc);
+            this.Main.Controls.Add(this.Btn_juice);
+            this.Main.Controls.Add(this.Btn_coffee);
+            this.Main.Controls.Add(this.Panel_coffee);
+            this.Main.Controls.Add(this.Btn_Cancel);
+            this.Main.Location = new System.Drawing.Point(19, 32);
+            this.Main.Name = "Main";
+            this.Main.Size = new System.Drawing.Size(495, 453);
+            this.Main.TabIndex = 18;
+
             // 
             // Panel_coffee
             // 
@@ -449,7 +467,7 @@ namespace Project_Kiosk
             // 
             // Btn_Cancel
             // 
-            this.Btn_Cancel.Location = new System.Drawing.Point(13, 352);
+            this.Btn_Cancel.Location = new System.Drawing.Point(218, 360);
             this.Btn_Cancel.Name = "Btn_Cancel";
             this.Btn_Cancel.Size = new System.Drawing.Size(155, 68);
             this.Btn_Cancel.TabIndex = 5;
@@ -457,19 +475,10 @@ namespace Project_Kiosk
             this.Btn_Cancel.UseVisualStyleBackColor = true;
             this.Btn_Cancel.Click += new System.EventHandler(this.Btn_Cancel_Click);
             // 
-            // Btn_Order
-            // 
-            this.Btn_Order.Location = new System.Drawing.Point(218, 352);
-            this.Btn_Order.Name = "Btn_Order";
-            this.Btn_Order.Size = new System.Drawing.Size(155, 68);
-            this.Btn_Order.TabIndex = 6;
-            this.Btn_Order.Text = "주문하기";
-            this.Btn_Order.UseVisualStyleBackColor = true;
-            this.Btn_Order.Click += new System.EventHandler(this.Btn_Order_Click);
-            // 
             // Panel_add
             // 
             this.Panel_add.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.Panel_add.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.Panel_add.Controls.Add(this.Panel_add_t);
             this.Panel_add.Controls.Add(this.Panel_add_j);
             this.Panel_add.Controls.Add(this.Panel_add_c);
@@ -676,13 +685,13 @@ namespace Project_Kiosk
             this.Btn_back.Text = "돌아가기";
             this.Btn_back.UseVisualStyleBackColor = true;
             this.Btn_back.Click += new System.EventHandler(this.Btn_back_Click);
-            // 
+/*            // 
             // Main
             // 
-            this.Main.Controls.Add(this.Label_Price);
+            this.Main.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.Main.Controls.Add(this.Panel_add);
             this.Main.Controls.Add(this.Panel_bakery);
             this.Main.Controls.Add(this.Panel_etc);
-            this.Main.Controls.Add(this.Panel_add);
             this.Main.Controls.Add(this.Panel_Juice);
             this.Main.Controls.Add(this.Btn_bakery);
             this.Main.Controls.Add(this.Btn_etc);
@@ -690,25 +699,16 @@ namespace Project_Kiosk
             this.Main.Controls.Add(this.Btn_coffee);
             this.Main.Controls.Add(this.Panel_coffee);
             this.Main.Controls.Add(this.Btn_Cancel);
-            this.Main.Controls.Add(this.Btn_Order);
             this.Main.Location = new System.Drawing.Point(19, 32);
             this.Main.Name = "Main";
             this.Main.Size = new System.Drawing.Size(495, 453);
-            this.Main.TabIndex = 18;
-            // 
-            // Label_Price
-            // 
-            this.Label_Price.AutoSize = true;
-            this.Label_Price.Location = new System.Drawing.Point(391, 402);
-            this.Label_Price.Name = "Label_Price";
-            this.Label_Price.Size = new System.Drawing.Size(29, 12);
-            this.Label_Price.TabIndex = 18;
-            this.Label_Price.Text = "가격";
+            this.Main.TabIndex = 18;*/
             // 
             // Panel_order
             // 
+            this.Panel_order.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.Panel_order.Controls.Add(this.Btn_cart_cancel);
             this.Panel_order.Controls.Add(this.Btn_pay_Card);
-            this.Panel_order.Controls.Add(this.Btn_pay_Cash);
             this.Panel_order.Controls.Add(this.Total_price_label);
             this.Panel_order.Controls.Add(this.total_Price);
             this.Panel_order.Controls.Add(this.OrderList);
@@ -717,6 +717,16 @@ namespace Project_Kiosk
             this.Panel_order.Name = "Panel_order";
             this.Panel_order.Size = new System.Drawing.Size(495, 453);
             this.Panel_order.TabIndex = 19;
+            // 
+            // Btn_pay_Card
+            // 
+            this.Btn_pay_Card.Font = new System.Drawing.Font("굴림", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.Btn_pay_Card.Location = new System.Drawing.Point(273, 352);
+            this.Btn_pay_Card.Name = "Btn_pay_Card";
+            this.Btn_pay_Card.Size = new System.Drawing.Size(192, 84);
+            this.Btn_pay_Card.TabIndex = 5;
+            this.Btn_pay_Card.Text = "PAY";
+            this.Btn_pay_Card.UseVisualStyleBackColor = true;
             // 
             // Total_price_label
             // 
@@ -743,9 +753,9 @@ namespace Project_Kiosk
             this.OrderList.Font = new System.Drawing.Font("휴먼둥근헤드라인", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.OrderList.Location = new System.Drawing.Point(3, 31);
             this.OrderList.Name = "OrderList";
-            this.OrderList.Size = new System.Drawing.Size(150, 25);
+            this.OrderList.Size = new System.Drawing.Size(153, 25);
             this.OrderList.TabIndex = 1;
-            this.OrderList.Text = "주문 리스트";
+            this.OrderList.Text = "Cart List";
             // 
             // dataGridView1
             // 
@@ -770,28 +780,19 @@ namespace Project_Kiosk
             this.dataGridView1.Location = new System.Drawing.Point(3, 67);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(489, 224);
             this.dataGridView1.TabIndex = 0;
             // 
-            // Btn_pay_Cash
+            // Btn_cart_cancel
             // 
-            this.Btn_pay_Cash.Font = new System.Drawing.Font("굴림", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.Btn_pay_Cash.Location = new System.Drawing.Point(28, 352);
-            this.Btn_pay_Cash.Name = "Btn_pay_Cash";
-            this.Btn_pay_Cash.Size = new System.Drawing.Size(192, 84);
-            this.Btn_pay_Cash.TabIndex = 4;
-            this.Btn_pay_Cash.Text = "CASH";
-            this.Btn_pay_Cash.UseVisualStyleBackColor = true;
-            // 
-            // Btn_pay_Card
-            // 
-            this.Btn_pay_Card.Font = new System.Drawing.Font("굴림", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.Btn_pay_Card.Location = new System.Drawing.Point(273, 352);
-            this.Btn_pay_Card.Name = "Btn_pay_Card";
-            this.Btn_pay_Card.Size = new System.Drawing.Size(192, 84);
-            this.Btn_pay_Card.TabIndex = 5;
-            this.Btn_pay_Card.Text = "CARD";
-            this.Btn_pay_Card.UseVisualStyleBackColor = true;
+            this.Btn_cart_cancel.Location = new System.Drawing.Point(403, 36);
+            this.Btn_cart_cancel.Name = "Btn_cart_cancel";
+            this.Btn_cart_cancel.Size = new System.Drawing.Size(89, 25);
+            this.Btn_cart_cancel.TabIndex = 6;
+            this.Btn_cart_cancel.Text = "취소하기";
+            this.Btn_cart_cancel.UseVisualStyleBackColor = true;
+            this.Btn_cart_cancel.Click += new System.EventHandler(this.Btn_cart_cancel_Click);
             // 
             // Form1
             // 
@@ -815,7 +816,6 @@ namespace Project_Kiosk
             this.Panel_add_c.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.count)).EndInit();
             this.Main.ResumeLayout(false);
-            this.Main.PerformLayout();
             this.Panel_order.ResumeLayout(false);
             this.Panel_order.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -831,7 +831,6 @@ namespace Project_Kiosk
         private System.Windows.Forms.Button Btn_etc;
         private System.Windows.Forms.Button Btn_bakery;
         private System.Windows.Forms.Button Btn_Cancel;
-        private System.Windows.Forms.Button Btn_Order;
         private System.Windows.Forms.Button Btn_vanila;
         private System.Windows.Forms.Button Btn_espresso;
         private System.Windows.Forms.Button Btn_cappuccino;
@@ -884,9 +883,8 @@ namespace Project_Kiosk
         private System.Windows.Forms.Label OrderList;
         private System.Windows.Forms.Label total_Price;
         private System.Windows.Forms.Label Total_price_label;
-        private System.Windows.Forms.Label Label_Price;
         private System.Windows.Forms.Button Btn_pay_Card;
-        private System.Windows.Forms.Button Btn_pay_Cash;
+        private System.Windows.Forms.Button Btn_cart_cancel;
     }
 }
 
