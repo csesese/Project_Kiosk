@@ -125,9 +125,7 @@ namespace Project_Kiosk
 
                 string p = reader["total_price"].ToString();
 
-                this.total_price = Convert.ToInt32(p);
-
-                //MessageBox.Show("선택 가격:" + each_price +"/메인가격  :" +main_price+" /옵션가격: "+option_price);
+                this.total_price = Convert.ToInt32(p);              
 
             }
             reader.Close();
@@ -395,7 +393,53 @@ namespace Project_Kiosk
         //장바구니에서 개수 변경 하기
         private void Btn_cart_modify_Click(object sender, EventArgs e)
         {
+            //1 선택한 행의 card_serial no 에 원래 개수 저장
+            string selected = dataGridView1.CurrentRow.Cells["No"].Value.ToString();
+            int ss = Convert.ToInt32(selected);
+            int gaesu = 0;
+            int gagaek = 0;
 
+            string sql = "select count ,each_price from Cart where card_Serial = @param1";
+
+            SqlCommand sqlComm = new SqlCommand(sql, DBHelper.conn);
+
+            sqlComm.Parameters.AddWithValue("@param1", selected);
+
+            SqlDataReader reader = sqlComm.ExecuteReader();
+
+            while (reader.Read())
+            {
+
+                string c = reader["count"].ToString();
+                string ep = reader["each_price"].ToString();
+
+                gaesu = Convert.ToInt32(c);// 변경 전 개수
+                gagaek = Convert.ToInt32(ep); // 변경 전 가격 
+
+
+            }
+            reader.Close();
+            
+
+            //2 변경된 숫자 확인
+            string cha_gaesu = dataGridView1.CurrentRow.Cells["개수"].Value.ToString();
+            int changed_gaesu = Convert.ToInt32(cha_gaesu);
+
+            //3 선택한 행의 가격 확인
+            string selected_price = dataGridView1.CurrentRow.Cells["가격"].Value.ToString();
+            int changed_price = Convert.ToInt32(selected_price);
+            MessageBox.Show("원래" + gaesu + " / 변경" +changed_gaesu+"/가격 "+ selected_price);
+
+            //4 계산 : 변경된 개수에 맞는 가격
+            int sum = (gagaek / gaesu) * changed_gaesu;
+            int minus_price = changed_price - sum; // 가격 차액
+
+            this.total_price = total_price - minus_price;
+            Total_price_label.Text = total_price.ToString() + " 원";
+
+
+            //5 db변경 
+            dataGridView1.CurrentRow.Cells[5].Value = sum;
         }
 
 

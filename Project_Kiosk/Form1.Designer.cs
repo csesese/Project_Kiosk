@@ -29,8 +29,8 @@ namespace Project_Kiosk
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.Panel_coffee = new System.Windows.Forms.Panel();
             this.Btn_vanila = new System.Windows.Forms.Button();
             this.Btn_espresso = new System.Windows.Forms.Button();
@@ -85,12 +85,13 @@ namespace Project_Kiosk
             this.Btn_back = new System.Windows.Forms.Button();
             this.Main = new System.Windows.Forms.Panel();
             this.Panel_order = new System.Windows.Forms.Panel();
+            this.Btn_cart_modify = new System.Windows.Forms.Button();
+            this.Btn_cart_cancel = new System.Windows.Forms.Button();
             this.Btn_pay_Card = new System.Windows.Forms.Button();
             this.Total_price_label = new System.Windows.Forms.Label();
             this.total_Price = new System.Windows.Forms.Label();
             this.OrderList = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Btn_cart_cancel = new System.Windows.Forms.Button();
             this.Panel_coffee.SuspendLayout();
             this.Panel_Juice.SuspendLayout();
             this.Panel_etc.SuspendLayout();
@@ -104,26 +105,6 @@ namespace Project_Kiosk
             this.Panel_order.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
-
-            // 
-            // Main
-            // 
-            this.Main.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.Main.Controls.Add(this.Panel_add);
-            this.Main.Controls.Add(this.Panel_bakery);
-            this.Main.Controls.Add(this.Panel_etc);
-            this.Main.Controls.Add(this.Panel_Juice);
-            this.Main.Controls.Add(this.Btn_bakery);
-            this.Main.Controls.Add(this.Btn_etc);
-            this.Main.Controls.Add(this.Btn_juice);
-            this.Main.Controls.Add(this.Btn_coffee);
-            this.Main.Controls.Add(this.Panel_coffee);
-            this.Main.Controls.Add(this.Btn_Cancel);
-            this.Main.Location = new System.Drawing.Point(19, 32);
-            this.Main.Name = "Main";
-            this.Main.Size = new System.Drawing.Size(495, 453);
-            this.Main.TabIndex = 18;
-
             // 
             // Panel_coffee
             // 
@@ -685,7 +666,7 @@ namespace Project_Kiosk
             this.Btn_back.Text = "돌아가기";
             this.Btn_back.UseVisualStyleBackColor = true;
             this.Btn_back.Click += new System.EventHandler(this.Btn_back_Click);
-/*            // 
+            // 
             // Main
             // 
             this.Main.BackColor = System.Drawing.SystemColors.ButtonFace;
@@ -702,11 +683,12 @@ namespace Project_Kiosk
             this.Main.Location = new System.Drawing.Point(19, 32);
             this.Main.Name = "Main";
             this.Main.Size = new System.Drawing.Size(495, 453);
-            this.Main.TabIndex = 18;*/
+            this.Main.TabIndex = 18;
             // 
             // Panel_order
             // 
             this.Panel_order.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.Panel_order.Controls.Add(this.Btn_cart_modify);
             this.Panel_order.Controls.Add(this.Btn_cart_cancel);
             this.Panel_order.Controls.Add(this.Btn_pay_Card);
             this.Panel_order.Controls.Add(this.Total_price_label);
@@ -717,6 +699,26 @@ namespace Project_Kiosk
             this.Panel_order.Name = "Panel_order";
             this.Panel_order.Size = new System.Drawing.Size(495, 453);
             this.Panel_order.TabIndex = 19;
+            // 
+            // Btn_cart_modify
+            // 
+            this.Btn_cart_modify.Location = new System.Drawing.Point(294, 36);
+            this.Btn_cart_modify.Name = "Btn_cart_modify";
+            this.Btn_cart_modify.Size = new System.Drawing.Size(89, 25);
+            this.Btn_cart_modify.TabIndex = 7;
+            this.Btn_cart_modify.Text = "개수 변경하기";
+            this.Btn_cart_modify.UseVisualStyleBackColor = true;
+            this.Btn_cart_modify.Click += new System.EventHandler(this.Btn_cart_modify_Click);
+            // 
+            // Btn_cart_cancel
+            // 
+            this.Btn_cart_cancel.Location = new System.Drawing.Point(403, 36);
+            this.Btn_cart_cancel.Name = "Btn_cart_cancel";
+            this.Btn_cart_cancel.Size = new System.Drawing.Size(89, 25);
+            this.Btn_cart_cancel.TabIndex = 6;
+            this.Btn_cart_cancel.Text = "취소하기";
+            this.Btn_cart_cancel.UseVisualStyleBackColor = true;
+            this.Btn_cart_cancel.Click += new System.EventHandler(this.Btn_cart_cancel_Click);
             // 
             // Btn_pay_Card
             // 
@@ -760,39 +762,29 @@ namespace Project_Kiosk
             // dataGridView1
             // 
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridView1.Location = new System.Drawing.Point(3, 67);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(489, 224);
             this.dataGridView1.TabIndex = 0;
-            // 
-            // Btn_cart_cancel
-            // 
-            this.Btn_cart_cancel.Location = new System.Drawing.Point(403, 36);
-            this.Btn_cart_cancel.Name = "Btn_cart_cancel";
-            this.Btn_cart_cancel.Size = new System.Drawing.Size(89, 25);
-            this.Btn_cart_cancel.TabIndex = 6;
-            this.Btn_cart_cancel.Text = "취소하기";
-            this.Btn_cart_cancel.UseVisualStyleBackColor = true;
-            this.Btn_cart_cancel.Click += new System.EventHandler(this.Btn_cart_cancel_Click);
             // 
             // Form1
             // 
@@ -885,6 +877,7 @@ namespace Project_Kiosk
         private System.Windows.Forms.Label Total_price_label;
         private System.Windows.Forms.Button Btn_pay_Card;
         private System.Windows.Forms.Button Btn_cart_cancel;
+        private System.Windows.Forms.Button Btn_cart_modify;
     }
 }
 
