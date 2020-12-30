@@ -24,6 +24,7 @@ namespace Project_Kiosk
         int main_price = 0;
         int option_price = 0;
         int total_price=0; //총 가격 
+        string orderNum;
 
 
         public Form1()
@@ -386,6 +387,8 @@ namespace Project_Kiosk
             Total_price_label.Text = total_price.ToString() + " 원";
 
         }
+
+
         //장바구니에서 개수 변경 하기
         private void Btn_cart_modify_Click(object sender, EventArgs e)
         {
@@ -445,9 +448,22 @@ namespace Project_Kiosk
         //Pay 
         private void Btn_pay_Card_Click(object sender, EventArgs e)
         {
+            int data_num = ((DataTable)dataGridView1.DataSource).Rows.Count; //행 개수
+            //MessageBox.Show(data_num.ToString());
+
+            string order_Time = DateTime.Now.ToString("yyyyMMddHHmmss");
+            this.orderNum = "Ord" + dataGridView1.Rows[0].Cells[0].Value.ToString()+"#"+order_Time; //주문 번호
+
+            //Cart -> order_Detail  
+            string sql = "insert into order_Detail (order_Serial, menu_ID, count, sum_price,order_Number) " +
+                "select card_Serial, menu_ID, count, each_price , @param1  from Cart  ";
+
+            SqlCommand sqlComm = new SqlCommand(sql, DBHelper.conn);
+            sqlComm.Parameters.AddWithValue("@param1", orderNum);
+
+            sqlComm.ExecuteNonQuery();
 
         }
-
 
         #endregion
         //END-------------------------------------------------
