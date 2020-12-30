@@ -46,7 +46,7 @@ namespace Project_Kiosk
                     }
                     else
                     {
-                        MessageBox.Show("DB 연결이 되었습니다.");
+                        //MessageBox.Show("DB 연결이 되었습니다.");
                     }
                 }
             }
@@ -94,6 +94,7 @@ namespace Project_Kiosk
             string sql = "select  cast(price as int) as price from Menu where menu = @param1 ";
 
             SqlCommand sqlComm = new SqlCommand(sql, DBHelper.conn);
+            
 
             sqlComm.Parameters.AddWithValue("@param1", menu_price_Name);
 
@@ -103,10 +104,7 @@ namespace Project_Kiosk
             {
 
                 string p = reader["price"].ToString();
-
                 this.each_price = Convert.ToInt32(p);
-
-                //MessageBox.Show("선택 가격:" + each_price +"/메인가격  :" +main_price+" /옵션가격: "+option_price);
 
             }
             reader.Close();
@@ -156,9 +154,7 @@ namespace Project_Kiosk
             sqlComm2.Parameters.AddWithValue("@param2", total_price);
             sqlComm2.Parameters.AddWithValue("@param3", data_num);
 
-            sqlComm2.ExecuteNonQuery();
-            MessageBox.Show("히스토리에 들어갔당~");
-
+            sqlComm2.ExecuteNonQuery();       
         }
 
         //공통메서드 : Cart에 있는 데이터들 삭제 
@@ -170,6 +166,10 @@ namespace Project_Kiosk
             sqlComm2.ExecuteNonQuery();
 
             this.total_price = 0;
+            this.IceHot = null; 
+            each_price = 0;
+            main_price = 0;
+            option_price = 0;
             Total_price_label.Text = total_price.ToString() + " 원";
 
         }
@@ -177,17 +177,16 @@ namespace Project_Kiosk
         //주문 전체 취소 
         private void Btn_Cancel_Click(object sender, EventArgs e)
         {
-            string sql = "delete from Cart";
+            DeleteCart();
 
-            SqlCommand sqlComm = new SqlCommand(sql, DBHelper.conn);
-
-            sqlComm.ExecuteNonQuery();
             MessageBox.Show("주문이 전체 취소 되었습니다.");
 
             total_price = 0;
             each_price = 0;
             main_price = 0;
             option_price = 0;
+
+            ((DataTable)dataGridView1.DataSource).Rows.Clear(); // 화면상의 datagird 행들 삭제
 
         }
 
@@ -298,8 +297,6 @@ namespace Project_Kiosk
 
             SqlCommand sqlComm = new SqlCommand(sql, DBHelper.conn);
 
-
-            MessageBox.Show(Menu + "," + Option + "/" + surang);
             if (Option == null)
             {
                 Option = "-";
@@ -308,6 +305,11 @@ namespace Project_Kiosk
             {
                 surang = 1;
             }
+
+            if (IceHot == null)
+            {    MessageBox.Show("ICE 또는 HOT 을 선택해주세요."); 
+                return;   }
+ 
 
             int sum = ((main_price + option_price) * surang);
 
@@ -324,7 +326,7 @@ namespace Project_Kiosk
             //주문담기 후 수량 초기화
             count.Value = 1;
             Option = null;
-
+            this.IceHot = null;
             each_price = 0;
             main_price = 0;
             option_price = 0;
@@ -375,8 +377,7 @@ namespace Project_Kiosk
             else
             {
                 this.str = str + "+" + Abtn.Text;
-                option_name.Text += "+" + Abtn.Text;
-                MessageBox.Show(str);
+                option_name.Text += "+" + Abtn.Text;                
             }
             this.Option = str;
         }
@@ -459,8 +460,6 @@ namespace Project_Kiosk
             //2 변경된 개수 확인
             string selected_gaesu = dataGridView1.CurrentRow.Cells["개수"].Value.ToString();
             int changed_gaesu = Convert.ToInt32(selected_gaesu);
-
-            MessageBox.Show("원래" + gaesu + " / 변경" + changed_gaesu + "/가격 " + gagaek);
 
             //3 계산 : 변경된 개수에 맞는 가격
             int sum = (gagaek / gaesu) * changed_gaesu;

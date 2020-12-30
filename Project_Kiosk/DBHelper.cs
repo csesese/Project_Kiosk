@@ -90,5 +90,6 @@ namespace Project_Kiosk
             if (IsDBConnected)
                 DBConn.Close();
         }
+
     }
 }
