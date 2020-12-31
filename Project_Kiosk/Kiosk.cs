@@ -93,18 +93,15 @@ namespace Project_Kiosk
 
             string sql = "select  cast(price as int) as price from Menu where menu = '" + menu_price_Name + "' ";
 
-            SqlCommand sqlComm = new SqlCommand(sql, DBHelper.conn);
-           
-            SqlDataReader reader = sqlComm.ExecuteReader();
+            DataTable logDt = new DataTable();
+            int nRet = DBHelper.ExecuteReader(sql, out logDt);
 
-            while (reader.Read())
+            if(nRet == 0)
             {
-
-                string p = reader["price"].ToString();
+                string p = logDt.Rows[0]["price"].ToString();
                 this.each_price = Convert.ToInt32(p);
-
             }
-            reader.Close();
+
             return each_price; //click 한 메뉴 가격 
 
         }
@@ -114,19 +111,16 @@ namespace Project_Kiosk
         {
             string sql = "select sum(each_price) as total_price from Cart";
 
-            SqlCommand sqlComm = new SqlCommand(sql, DBHelper.conn);
+            DataTable logDt = new DataTable();
+            int nRet = DBHelper.ExecuteReader(sql, out logDt);
 
-            SqlDataReader reader = sqlComm.ExecuteReader();
-
-            while (reader.Read())
+            if (nRet == 0)
             {
 
-                string p = reader["total_price"].ToString();
-
+                string p = logDt.Rows[0]["total_price"].ToString();
                 this.total_price = Convert.ToInt32(p);
-
             }
-            reader.Close();
+            
             return total_price; //click 한 메뉴 가격 
         }
 
@@ -411,19 +405,18 @@ namespace Project_Kiosk
 
             string sql = "select count ,each_price from Cart where card_Serial ='" + selected + "'";
 
-            SqlCommand sqlComm = new SqlCommand(sql, DBHelper.conn);
-
-            SqlDataReader reader = sqlComm.ExecuteReader();
-
-            while (reader.Read())
+            DataTable logDt = new DataTable();
+            int nRet = DBHelper.ExecuteReader(sql, out logDt);
+            
+            if(nRet ==0)
             {
-                string c = reader["count"].ToString();
-                string ep = reader["each_price"].ToString();
+                    string c = logDt.Rows[0]["count"].ToString();
+                    string ep = logDt.Rows[0]["each_price"].ToString();
 
-                gaesu = Convert.ToInt32(c);// 변경 전 개수
-                gagaek = Convert.ToInt32(ep); // 변경 전 가격 
+                    gaesu = Convert.ToInt32(c);// 변경 전 개수
+                    gagaek = Convert.ToInt32(ep); // 변경 전 가격 
+                
             }
-            reader.Close();
 
 
             //2 변경된 개수 확인
@@ -496,8 +489,10 @@ namespace Project_Kiosk
         }
         #endregion
         //END-------------------------------------------------
+        
+        
     }
-
+    
 }
 
 

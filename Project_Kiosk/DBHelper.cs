@@ -108,8 +108,7 @@ namespace Project_Kiosk
 
             sqlComm = new SqlCommand(sql, conn);
 
-            sqlComm.ExecuteNonQuery();
-            MessageBox.Show("ExecuteNonQuery 작업 종료");
+            sqlComm.ExecuteNonQuery();           
             return 0;
         }
 
