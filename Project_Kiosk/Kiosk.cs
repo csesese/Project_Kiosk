@@ -91,13 +91,10 @@ namespace Project_Kiosk
         public int Click_Price()
         {
 
-            string sql = "select  cast(price as int) as price from Menu where menu = @param1 ";
+            string sql = "select  cast(price as int) as price from Menu where menu = '" + menu_price_Name + "' ";
 
             SqlCommand sqlComm = new SqlCommand(sql, DBHelper.conn);
-            
-
-            sqlComm.Parameters.AddWithValue("@param1", menu_price_Name);
-
+           
             SqlDataReader reader = sqlComm.ExecuteReader();
 
             while (reader.Read())
@@ -138,32 +135,22 @@ namespace Project_Kiosk
         {
             //Cart -> order_Detail  
             string sql = "insert into order_Detail (order_Serial, menu_ID, count, sum_price,order_Number) " +
-                "select card_Serial, menu_ID, count, each_price , @param1  from Cart  ";
+                "select card_Serial, menu_ID, count, each_price ,'" + orderNum + "'  from Cart  ";
 
-            SqlCommand sqlComm = new SqlCommand(sql, DBHelper.conn);
-            sqlComm.Parameters.AddWithValue("@param1", orderNum);
-
-            sqlComm.ExecuteNonQuery();
+            DBHelper.ExecuteNonQuery(sql);
 
             //Cart-> order_hisotry
             string sql2 = "insert into Order_history (order_Number, total_Price, Order_detail_Count )" +
-                            "VALUES(@param1,@param2,@param3)";
-
-            SqlCommand sqlComm2 = new SqlCommand(sql2, DBHelper.conn);
-            sqlComm2.Parameters.AddWithValue("@param1", orderNum);            
-            sqlComm2.Parameters.AddWithValue("@param2", total_price);
-            sqlComm2.Parameters.AddWithValue("@param3", data_num);
-
-            sqlComm2.ExecuteNonQuery();       
+                            "VALUES('"+ orderNum + "','" + total_price + "','" + data_num + "')";
+     
+            DBHelper.ExecuteNonQuery(sql2);
         }
 
         //공통메서드 : Cart에 있는 데이터들 삭제 
         public void DeleteCart()
         {
             string delete_sql = "delete from Cart ";
-            SqlCommand sqlComm2 = new SqlCommand(delete_sql, DBHelper.conn);
-
-            sqlComm2.ExecuteNonQuery();
+            DBHelper.ExecuteNonQuery(delete_sql);
 
             this.total_price = 0;
             this.IceHot = null; 
@@ -293,10 +280,6 @@ namespace Project_Kiosk
         private void Btn_cart_Click(object sender, EventArgs e)
         {
 
-            string sql = "insert into Cart(menu_ID,count,menu_option,IceHot,each_price) values (@param1,@param2,@param3,@param4,@param5)";
-
-            SqlCommand sqlComm = new SqlCommand(sql, DBHelper.conn);
-
             if (Option == null)
             {
                 Option = "-";
@@ -310,17 +293,11 @@ namespace Project_Kiosk
             {    MessageBox.Show("ICE 또는 HOT 을 선택해주세요."); 
                 return;   }
  
-
             int sum = ((main_price + option_price) * surang);
 
-            sqlComm.Parameters.AddWithValue("@param1", Menu);
-            sqlComm.Parameters.AddWithValue("@param2", surang);
-            sqlComm.Parameters.AddWithValue("@param3", Option);
-            sqlComm.Parameters.AddWithValue("@param4", IceHot);
-            sqlComm.Parameters.AddWithValue("@param5", sum);
-
-            sqlComm.ExecuteNonQuery();
-
+            string sql = "insert into Cart(menu_ID,count,menu_option,IceHot,each_price)" +
+                        " values ('" + Menu + "','" + surang + "','" + Option + "','" + IceHot + "','" + sum + "')";
+            DBHelper.ExecuteNonQuery(sql);
             this.total_price += sum;
 
             //주문담기 후 수량 초기화
@@ -333,14 +310,11 @@ namespace Project_Kiosk
 
 
             //---------장부구니 list 보여주기-------------
-            DataTable table = null;
+            DataTable dtOut = null;
 
-            SqlDataAdapter adapter = new SqlDataAdapter(
-                "select c.card_Serial as No , c.IceHot as Type, c.menu_ID as 메뉴, c.menu_option as 선택사항 , c.count as 개수, c.each_price as 가격 from Cart c left outer join Menu m on c.menu_ID = m.menu ", DBHelper.DBConn);
-            table = new DataTable();
-
-            adapter.Fill(table);
-            dataGridView1.DataSource = table;
+            string cart_sql = "select c.card_Serial as No , c.IceHot as Type, c.menu_ID as 메뉴, c.menu_option as 선택사항 , c.count as 개수, c.each_price as 가격 from Cart c left outer join Menu m on c.menu_ID = m.menu ";
+            int Out = DBHelper.ExecuteReader(cart_sql,out dtOut);
+            dataGridView1.DataSource = dtOut;
 
             dataGridView1.Columns[0].ReadOnly = true;
             dataGridView1.Columns[1].ReadOnly = true;
@@ -412,12 +386,9 @@ namespace Project_Kiosk
 
             string selected = dataGridView1.CurrentRow.Cells["No"].Value.ToString();
 
-            string sql = "delete from Cart where card_Serial= @param2";
+            string sql = "delete from Cart where card_Serial= '" + selected +  "'";
 
-            SqlCommand sqlComm = new SqlCommand(sql, DBHelper.conn);
-            sqlComm.Parameters.AddWithValue("@param2", selected);
-
-            sqlComm.ExecuteNonQuery();
+            DBHelper.ExecuteNonQuery(sql);
 
             foreach (DataGridViewRow dgr in dataGridView1.SelectedRows)
             {
@@ -438,11 +409,9 @@ namespace Project_Kiosk
             int gaesu = 0;
             int gagaek = 0;
 
-            string sql = "select count ,each_price from Cart where card_Serial = @param1";
+            string sql = "select count ,each_price from Cart where card_Serial ='" + selected + "'";
 
             SqlCommand sqlComm = new SqlCommand(sql, DBHelper.conn);
-
-            sqlComm.Parameters.AddWithValue("@param1", selected);
 
             SqlDataReader reader = sqlComm.ExecuteReader();
 
@@ -467,21 +436,13 @@ namespace Project_Kiosk
             //4 db변경 
             dataGridView1.CurrentRow.Cells[5].Value = sum;
 
-            string sql2 = "update Cart set count = @param1, each_price = @param2 where card_Serial = @param3";
+            string sql2 = "update Cart set count = '" + changed_gaesu + "', each_price = '" + sum + "' where card_Serial ='" + selected + "'";
+            DBHelper.ExecuteNonQuery(sql2);
 
-            SqlCommand sqlComm2 = new SqlCommand(sql2, DBHelper.conn);
-            sqlComm2.Parameters.AddWithValue("@param1", changed_gaesu);
-            sqlComm2.Parameters.AddWithValue("@param2", sum);
-            sqlComm2.Parameters.AddWithValue("@param3", selected);
-
-            sqlComm2.ExecuteNonQuery();
-
-            //최종 가격 변경 
+            //5 최종 가격 변경 
             this.total_price = total_sum();
             Total_price_label.Text = total_price.ToString() + " 원";
         }
-
-
 
         #endregion
         //END-------------------------------------------------
@@ -531,9 +492,7 @@ namespace Project_Kiosk
                     ((DataTable)dataGridView1.DataSource).Rows.Clear(); // 화면상의 datagird 행들 삭제
 
                 }
-
             }
-
         }
         #endregion
         //END-------------------------------------------------

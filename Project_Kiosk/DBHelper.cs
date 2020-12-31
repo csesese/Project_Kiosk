@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -82,6 +83,34 @@ namespace Project_Kiosk
                 }
                 return true;
             }
+        }
+
+        //결과 집합을 반환 o
+        public static int ExecuteReader(string sql, out DataTable dtOut)
+        {
+            //SqlCommand sqlComm = null;           
+            SqlDataAdapter adapter = null;
+            
+            //출력 초기화
+            dtOut = null;
+            adapter = new SqlDataAdapter(sql,conn);
+
+            dtOut = new DataTable();
+            adapter.Fill(dtOut);
+            return 0;
+
+        }
+
+        //처리용 쿼리 (결과 집합을 반환 x)
+        public static int ExecuteNonQuery(string sql)
+        {
+            SqlCommand sqlComm = null;
+
+            sqlComm = new SqlCommand(sql, conn);
+
+            sqlComm.ExecuteNonQuery();
+            MessageBox.Show("ExecuteNonQuery 작업 종료");
+            return 0;
         }
 
         //DB 해제 
