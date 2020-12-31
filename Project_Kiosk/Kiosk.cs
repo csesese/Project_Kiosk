@@ -128,16 +128,8 @@ namespace Project_Kiosk
         public void CartToOrderdetail()
         {
             //Cart -> order_Detail  
-            string sql = "insert into order_Detail (order_Serial, menu_ID, count, sum_price,order_Number) " +
-                "select card_Serial, menu_ID, count, each_price ,'" + orderNum + "'  from Cart  ";
-
+            string sql = "sp_order_insert '" + orderNum + "','" + total_price + "','" + data_num + "' ";
             DBHelper.ExecuteNonQuery(sql);
-
-            //Cart-> order_hisotry
-            string sql2 = "insert into Order_history (order_Number, total_Price, Order_detail_Count )" +
-                            "VALUES('"+ orderNum + "','" + total_price + "','" + data_num + "')";
-     
-            DBHelper.ExecuteNonQuery(sql2);
         }
 
         //공통메서드 : Cart에 있는 데이터들 삭제 
@@ -310,13 +302,33 @@ namespace Project_Kiosk
             int Out = DBHelper.ExecuteReader(cart_sql,out dtOut);
             dataGridView1.DataSource = dtOut;
 
+            //dataGridView 스타일
+
+            foreach (DataGridViewColumn column in dataGridView1.Columns)
+            {
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+
+            dataGridView1.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            dataGridView1.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;            
+            dataGridView1.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView1.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView1.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView1.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridView1.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
+            dataGridView1.Columns[0].Width= 5;
+            
+
             dataGridView1.Columns[0].ReadOnly = true;
             dataGridView1.Columns[1].ReadOnly = true;
             dataGridView1.Columns[2].ReadOnly = true;
             dataGridView1.Columns[3].ReadOnly = true;
             dataGridView1.Columns[5].ReadOnly = true;
 
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            //dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+           
 
             Total_price_label.Text = total_price.ToString() + " 원";
 
@@ -344,10 +356,19 @@ namespace Project_Kiosk
             }
             else
             {
-                this.str = str + "+" + Abtn.Text;
-                option_name.Text += "+" + Abtn.Text;                
+                if (Option.Equals("사이즈업"))
+                {
+                    MessageBox.Show("사이즈업은 한 번만 가능합니다!");
+                    return;
+                }
+                else
+                {
+                    this.str = str + "+" + Abtn.Text;
+                    option_name.Text += "+" + Abtn.Text;
+                }
+                         
             }
-            this.Option = str;
+            this.Option = str.Trim();
         }
         //Ice or Hot
         private void Btn_IceHot_Click(object sender, EventArgs e)

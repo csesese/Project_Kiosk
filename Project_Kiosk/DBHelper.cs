@@ -108,7 +108,8 @@ namespace Project_Kiosk
 
             sqlComm = new SqlCommand(sql, conn);
 
-            sqlComm.ExecuteNonQuery();           
+            sqlComm.ExecuteNonQuery();
+
             return 0;
         }
 
