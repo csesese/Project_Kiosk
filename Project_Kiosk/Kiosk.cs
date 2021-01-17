@@ -143,24 +143,31 @@ namespace Project_Kiosk
             each_price = 0;
             main_price = 0;
             option_price = 0;
-            Total_price_label.Text = total_price.ToString() + " 원";
+            Total_price_label.Text = string.Format("{0:n0}", total_price) + " 원";
 
         }
 
         //주문 전체 취소 
         private void Btn_Cancel_Click(object sender, EventArgs e)
         {
-            DeleteCart();
+            if (dataGridView1.RowCount > 0)
+            {
+                DeleteCart();
 
-            MessageBox.Show("주문이 전체 취소 되었습니다.");
+                MessageBox.Show("주문이 전체 취소 되었습니다.");
 
-            total_price = 0;
-            each_price = 0;
-            main_price = 0;
-            option_price = 0;
+                total_price = 0;
+                each_price = 0;
+                main_price = 0;
+                option_price = 0;
 
-            ((DataTable)dataGridView1.DataSource).Rows.Clear(); // 화면상의 datagird 행들 삭제
-
+                ((DataTable)dataGridView1.DataSource).Rows.Clear(); // 화면상의 datagird 행들 삭제
+            }
+            else
+            {
+                MessageBox.Show("장바구니에 담긴 주문이 없습니다.");
+                return;
+            }
         }
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -281,8 +288,9 @@ namespace Project_Kiosk
  
             int sum = ((main_price + option_price) * surang);
 
-            string sql = "insert into Cart(menu_ID,count,menu_option,IceHot,each_price)" +
-                        " values ('" + Menu + "','" + surang + "','" + Option + "','" + IceHot + "','" + sum + "')";
+            /*string sql = "insert into Cart(menu_ID,count,menu_option,IceHot,each_price)" +
+                        " values ('" + Menu + "','" + surang + "','" + Option + "','" + IceHot + "','" + sum + "')";*/
+            string sql = "sp_add_toCart '" + Menu + "','" + surang + "','" + Option + "','" + IceHot + "','" + sum + "' ";
             DBHelper.ExecuteNonQuery(sql);
             this.total_price += sum;
 
@@ -298,7 +306,9 @@ namespace Project_Kiosk
             //---------장부구니 list 보여주기-------------
             DataTable dtOut = null;
 
-            string cart_sql = "select c.card_Serial as No , c.IceHot as Type, c.menu_ID as 메뉴, c.menu_option as 선택사항 , c.count as 개수, c.each_price as 가격 from Cart c left outer join Menu m on c.menu_ID = m.menu ";
+            /*string cart_sql = "select c.card_Serial as No , c.IceHot as Type, c.menu_ID as 메뉴, c.menu_option as 선택사항 , c.count as 개수, replace(CONVERT(VARCHAR, CONVERT(money, c.each_price), 1), '.00', '') as 가격 " +
+                "from Cart c left outer join Menu m on c.menu_ID = m.menu ";*/
+            string cart_sql = "show_CartList";
             int Out = DBHelper.ExecuteReader(cart_sql,out dtOut);
             dataGridView1.DataSource = dtOut;
 
@@ -318,8 +328,17 @@ namespace Project_Kiosk
             dataGridView1.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dataGridView1.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
-            dataGridView1.Columns[0].Width= 5;
-            
+            //크키조정
+            dataGridView1.Columns[0].Width = 50;
+            dataGridView1.Columns[1].Width = 50;
+            dataGridView1.Columns[2].Width = 100;
+            dataGridView1.Columns[3].Width = 186;
+            dataGridView1.Columns[4].Width = 40;
+            dataGridView1.Columns[5].Width = 59;
+
+            dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.AliceBlue;
+            dataGridView1.EnableHeadersVisualStyles = false;           
+
 
             dataGridView1.Columns[0].ReadOnly = true;
             dataGridView1.Columns[1].ReadOnly = true;
@@ -327,10 +346,10 @@ namespace Project_Kiosk
             dataGridView1.Columns[3].ReadOnly = true;
             dataGridView1.Columns[5].ReadOnly = true;
 
-            //dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-           
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
 
-            Total_price_label.Text = total_price.ToString() + " 원";
+
+            Total_price_label.Text = string.Format("{0:n0}", total_price) + " 원";
 
             dataGridView1.RowHeadersVisible = false; //첫 열 지우기     
 
@@ -411,7 +430,7 @@ namespace Project_Kiosk
             }
             //최종 가격 변경 
             this.total_price = total_sum();
-            Total_price_label.Text = total_price.ToString() + " 원";
+            Total_price_label.Text = string.Format("{0:n0}", total_price) + " 원";
 
         }
 
@@ -455,7 +474,8 @@ namespace Project_Kiosk
 
             //5 최종 가격 변경 
             this.total_price = total_sum();
-            Total_price_label.Text = total_price.ToString() + " 원";
+            Total_price_label.Text = string.Format("{0:n0}", total_price) + " 원";
+            
         }
 
         #endregion
