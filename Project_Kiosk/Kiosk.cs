@@ -57,7 +57,8 @@ namespace Project_Kiosk
             }            
         }
 
-        //카테고리별 관련 panel 뜸
+        #region /카테고리별 관련 panel 뜸
+
         private void Btn_category_Click(object sender, EventArgs e)
         {
             if (Panel_add.Visible == true)
@@ -91,12 +92,18 @@ namespace Project_Kiosk
 
 
         }
+        #endregion
 
-        //공통메서드 : Button 클릭시 해당 메뉴/옵션 가격 가져옴
+        //----------------------------------------------------------------------------------------------
+
+        #region 사용자 정의 함수
+
+
+        #region 공통메서드 : Button 클릭시 해당 메뉴/옵션 가격 가져옴
         public int Click_Price()
         {
 
-            string sql = "select  cast(price as int) as price from Menu where menu = '" + menu_price_Name + "' ";
+            string sql = "sp_Click_Price '" + menu_price_Name + "' ";
 
             DataTable logDt = new DataTable();
             int nRet = DBHelper.ExecuteReader(sql, out logDt);
@@ -110,11 +117,13 @@ namespace Project_Kiosk
             return each_price; //click 한 메뉴 가격 
 
         }
+        #endregion
 
-        //공통메서드 : 최종 가격 
+        #region  공통메서드 : 최종 가격 
+
         public int total_sum()
         {
-            string sql = "select sum(each_price) as total_price from Cart";
+            string sql = "sp_total_sum";
 
             DataTable logDt = new DataTable();
             int nRet = DBHelper.ExecuteReader(sql, out logDt);
@@ -123,24 +132,36 @@ namespace Project_Kiosk
             {
 
                 string p = logDt.Rows[0]["total_price"].ToString();
-                this.total_price = Convert.ToInt32(p);
+                if (p == "")
+                {
+                    this.total_price = 0;
+                }
+                else
+                {
+                    this.total_price = Convert.ToInt32(p);
+                }
+                
             }
             
             return total_price; //click 한 메뉴 가격 
         }
+        #endregion
 
-        //공통메서드 : Cart -> order_Detail  & Cart-> order_hisotry
+        #region 공통메서드 : Cart -> order_Detail  & Cart-> order_hisotry
+        
         public void CartToOrderdetail()
         {
             //Cart -> order_Detail  
             string sql = "sp_order_insert '" + orderNum + "','" + total_price + "','" + data_num + "' ";
             DBHelper.ExecuteNonQuery(sql);
         }
+        #endregion
 
-        //공통메서드 : Cart에 있는 데이터들 삭제 
+        #region 공통메서드 : Cart에 있는 데이터들 삭제 
+
         public void DeleteCart()
         {
-            string delete_sql = "delete from Cart ";
+            string delete_sql = "sp_deleteCart ";
             DBHelper.ExecuteNonQuery(delete_sql);
 
             this.total_price = 0;
@@ -148,11 +169,15 @@ namespace Project_Kiosk
             each_price = 0;
             main_price = 0;
             option_price = 0;
+
             Total_price_label.Text = string.Format("{0:n0}", total_price) + " 원";
 
         }
 
-        //공통메서드 : 초기화 
+        #endregion
+
+        #region 공통메서드 : 초기화 
+      
         public void 초기화()
         {
             option_name.Text = "+";
@@ -163,8 +188,13 @@ namespace Project_Kiosk
             count.Value = 1;
             샷추가=0;
         }
+        #endregion
 
-        //주문 전체 취소 
+        #endregion
+
+        //----------------------------------------------------------------------------------------------
+
+        #region 주문 전체 취소 
         private void Btn_Cancel_Click(object sender, EventArgs e)
         {
             if (dataGridView1.RowCount > 0)
@@ -186,16 +216,18 @@ namespace Project_Kiosk
                 return;
             }
         }
+        #endregion
 
-        
+        //----------------------------------------------------------------------------------------------
 
-        //++++++++++++++++++++++++++++++++++++++++++++++++++++
         #region 메인메뉴 선택 btn_click
         //1.메인메뉴 선택-> 선택옵션 panel뜸
         private void mainMenu_Click(object sender, EventArgs e)
         {
             Button Mbtn = sender as Button;
-            this.Menu = Mbtn.Text; //선택 메뉴 이름
+            //this.Menu = Mbtn.Text; //선택 메뉴 이름
+            this.Menu = Mbtn.Tag.ToString();
+            
 
             menu_name.Text = Menu;
             this.menu_price_Name = Menu;
@@ -207,7 +239,7 @@ namespace Project_Kiosk
             Panel_add_t.Visible = false;
 
             
-            switch (Mbtn.Text)
+            switch (Menu)
             {
                 //1 coffee
                 case "바닐라 라떼":               
@@ -265,20 +297,23 @@ namespace Project_Kiosk
         }
 
         #endregion
-        //END-------------------------------------------------
 
-        //++++++++++++++++++++++++++++++++++++++++++++++++++++
+        //----------------------------------------------------------------------------------------------
+
+
         #region 주문담기(옵션)
 
-        //돌아가기         
+        #region 돌아가기
+
         private void Btn_back_Click(object sender, EventArgs e)
         {
             Panel_add.Visible = false;
             초기화();
         }
 
+        #endregion
 
-        //수량 체크 
+        #region 수량 체크 
         private void count_ValueChanged(object sender, EventArgs e)
         {
             NumericUpDown count = sender as NumericUpDown;
@@ -286,8 +321,10 @@ namespace Project_Kiosk
             this.surang = Convert.ToInt32(c);
 
         }
+        #endregion
 
-        //주문담기
+        #region 주문담기
+
         private void Btn_cart_Click(object sender, EventArgs e)
         {
 
@@ -316,10 +353,11 @@ namespace Project_Kiosk
             초기화();
             this.IceHot = null;           
             main_price = 0;
-           
 
 
-            //---------장부구니 list 보여주기-------------
+
+            #region 장부구니 list 보여주기
+
             DataTable dtOut = null;
           
             string cart_sql = "show_CartList";
@@ -369,19 +407,22 @@ namespace Project_Kiosk
 
             Panel_add.Visible = false;
 
-
+            #endregion
         }
         #endregion
-        //END-------------------------------------------------
 
-        //++++++++++++++++++++++++++++++++++++++++++++++++++++
-        #region OPTION 선택
-        //2.옵션 선택 
+        #endregion
+        //----------------------------------------------------------------------------------------------
+
+        #region MainMenu > OPTION 선택
+
+        #region 옵션선택
         private void Btn_coffeeOption_Click(object sender, EventArgs e)
         {
 
             Button Abtn = sender as Button;
-            this.menu_price_Name = Abtn.Text;
+            //this.menu_price_Name = Abtn.Text;
+            this.menu_price_Name = Abtn.Tag.ToString();
                         
 
             if (menu_price_Name.Equals("샷추가"))
@@ -393,8 +434,8 @@ namespace Project_Kiosk
 
             if (Option == null)
             {
-                str = Abtn.Text;
-                option_name.Text = Abtn.Text;
+                str = Abtn.Tag.ToString();
+                option_name.Text = Abtn.Tag.ToString() ;
             }
             else
             {
@@ -412,21 +453,25 @@ namespace Project_Kiosk
                     }
                     else
                     {
-                        this.str = str + "+" + Abtn.Text;
-                        option_name.Text += "+" + Abtn.Text;
+                        this.str = str + "+" + Abtn.Tag.ToString();
+                        option_name.Text += "+" + Abtn.Tag.ToString();
                     }                    
                 }                         
             }
             this.Option = str.Trim();
         }
-        //Ice or Hot
+
+        #endregion
+
+        #region Ice or Hot
         private void Btn_IceHot_Click(object sender, EventArgs e)
         {
             Button ihbtn = sender as Button;
             IceHot = ihbtn.Text;
         }
+        #endregion
 
-        //선택 옵션 사항 "선택취소" 하기
+        #region 선택취소
         private void Btn_optionCancel_Click(object sender, EventArgs e)
         {
             Option = null;
@@ -436,11 +481,13 @@ namespace Project_Kiosk
 
         }
         #endregion
-        //END-------------------------------------------------
 
-        //++++++++++++++++++++++++++++++++++++++++++++++++++++
+        #endregion
+        //----------------------------------------------------------------------------------------------
+
         #region 장바구니 : 취소 & 수정 
-        //장바구니 에서 취소하기 
+
+        #region 장바구니 에서 취소하기 
         private void Btn_cart_cancel_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count == 0)
@@ -450,7 +497,7 @@ namespace Project_Kiosk
 
             string selected = dataGridView1.CurrentRow.Cells["No"].Value.ToString();
 
-            string sql = "delete from Cart where card_Serial= '" + selected +  "'";
+            string sql = "sp_Cancel_Cart '" + selected +  "'";
 
             DBHelper.ExecuteNonQuery(sql);
 
@@ -464,8 +511,9 @@ namespace Project_Kiosk
 
         }
 
+        #endregion
 
-        //장바구니에서 개수 변경 하기
+        #region 장바구니에서 개수 변경 하기
         private void Btn_cart_modify_Click(object sender, EventArgs e)
         {
             //장바구니에 상품이 없을 때 개수변경 불가
@@ -482,7 +530,7 @@ namespace Project_Kiosk
                 int gaesu = 0;
                 int gagaek = 0;
 
-                string sql = "select count ,each_price from Cart where card_Serial ='" + selected + "'";
+                string sql = "sp_modify_Cart'" + selected + "'";
 
                 DataTable logDt = new DataTable();
                 int nRet = DBHelper.ExecuteReader(sql, out logDt);
@@ -508,7 +556,7 @@ namespace Project_Kiosk
                 //4 db변경 
                 dataGridView1.CurrentRow.Cells[5].Value = sum;
 
-                string sql2 = "update Cart set count = '" + changed_gaesu + "', each_price = '" + sum + "' where card_Serial ='" + selected + "'";
+                string sql2 = "sp_update_Cart  '" + changed_gaesu + "','" + sum + "','" + selected + "' ";
                 DBHelper.ExecuteNonQuery(sql2);
 
                 //5 최종 가격 변경 
@@ -516,11 +564,12 @@ namespace Project_Kiosk
                 Total_price_label.Text = string.Format("{0:n0}", total_price) + " 원";
             }
         }
+        #endregion
 
         #endregion
-        //END-------------------------------------------------
 
-        //++++++++++++++++++++++++++++++++++++++++++++++++++++
+        //----------------------------------------------------------------------------------------------
+
         #region 결재 진행
         //Pay 
         private void Btn_pay_Card_Click(object sender, EventArgs e)
@@ -582,11 +631,12 @@ namespace Project_Kiosk
             DeleteCart();
         }
         #endregion
-        //END-------------------------------------------------
+        
+        //----------------------------------------------------------------------------------------------
 
 
     }
-    
+
 }
 
 

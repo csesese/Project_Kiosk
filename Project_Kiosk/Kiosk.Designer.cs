@@ -29,8 +29,8 @@ namespace Project_Kiosk
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             this.Panel_coffee = new System.Windows.Forms.Panel();
             this.Btn_vanila = new System.Windows.Forms.Button();
             this.Btn_espresso = new System.Windows.Forms.Button();
@@ -128,7 +128,7 @@ namespace Project_Kiosk
             this.Btn_vanila.Size = new System.Drawing.Size(87, 60);
             this.Btn_vanila.TabIndex = 5;
             this.Btn_vanila.Tag = "바닐라 라떼";
-            this.Btn_vanila.Text = "바닐라 라떼\r\n";
+            this.Btn_vanila.Text = "바닐라 라떼\r\n4,500원";
             this.Btn_vanila.UseVisualStyleBackColor = true;
             this.Btn_vanila.Click += new System.EventHandler(this.mainMenu_Click);
             // 
@@ -139,7 +139,7 @@ namespace Project_Kiosk
             this.Btn_espresso.Size = new System.Drawing.Size(87, 60);
             this.Btn_espresso.TabIndex = 4;
             this.Btn_espresso.Tag = "에스프레소";
-            this.Btn_espresso.Text = "에스프레소";
+            this.Btn_espresso.Text = "에스프레소\r\n4,500원";
             this.Btn_espresso.UseVisualStyleBackColor = true;
             this.Btn_espresso.Click += new System.EventHandler(this.mainMenu_Click);
             // 
@@ -150,7 +150,7 @@ namespace Project_Kiosk
             this.Btn_cappuccino.Size = new System.Drawing.Size(87, 60);
             this.Btn_cappuccino.TabIndex = 3;
             this.Btn_cappuccino.Tag = "카푸치노";
-            this.Btn_cappuccino.Text = "카푸치노";
+            this.Btn_cappuccino.Text = "카푸치노\r\n4,500원";
             this.Btn_cappuccino.UseVisualStyleBackColor = true;
             this.Btn_cappuccino.Click += new System.EventHandler(this.mainMenu_Click);
             // 
@@ -161,7 +161,7 @@ namespace Project_Kiosk
             this.Btn_moca.Size = new System.Drawing.Size(87, 60);
             this.Btn_moca.TabIndex = 2;
             this.Btn_moca.Tag = "카페모카";
-            this.Btn_moca.Text = "카페모카";
+            this.Btn_moca.Text = "카페모카\r\n4,500원";
             this.Btn_moca.UseVisualStyleBackColor = true;
             this.Btn_moca.Click += new System.EventHandler(this.mainMenu_Click);
             // 
@@ -172,7 +172,7 @@ namespace Project_Kiosk
             this.Btn_latte.Size = new System.Drawing.Size(87, 60);
             this.Btn_latte.TabIndex = 1;
             this.Btn_latte.Tag = "카페라떼";
-            this.Btn_latte.Text = "카페라떼";
+            this.Btn_latte.Text = "카페라떼\r\n4,500원";
             this.Btn_latte.UseVisualStyleBackColor = true;
             this.Btn_latte.Click += new System.EventHandler(this.mainMenu_Click);
             // 
@@ -183,7 +183,7 @@ namespace Project_Kiosk
             this.Btn_Americano.Size = new System.Drawing.Size(87, 60);
             this.Btn_Americano.TabIndex = 0;
             this.Btn_Americano.Tag = "아메리카노";
-            this.Btn_Americano.Text = "아메리카노";
+            this.Btn_Americano.Text = "아메리카노\r\n4,000원";
             this.Btn_Americano.UseVisualStyleBackColor = true;
             this.Btn_Americano.Click += new System.EventHandler(this.mainMenu_Click);
             // 
@@ -212,7 +212,7 @@ namespace Project_Kiosk
             this.Btn_Tea3.Size = new System.Drawing.Size(87, 60);
             this.Btn_Tea3.TabIndex = 4;
             this.Btn_Tea3.Tag = "얼그레이";
-            this.Btn_Tea3.Text = "얼그레이";
+            this.Btn_Tea3.Text = "얼그레이\r\n4,300원";
             this.Btn_Tea3.UseVisualStyleBackColor = true;
             this.Btn_Tea3.Click += new System.EventHandler(this.mainMenu_Click);
             // 
@@ -223,7 +223,7 @@ namespace Project_Kiosk
             this.Btn_Tea5.Size = new System.Drawing.Size(87, 60);
             this.Btn_Tea5.TabIndex = 7;
             this.Btn_Tea5.Tag = "밀크티";
-            this.Btn_Tea5.Text = "밀크티";
+            this.Btn_Tea5.Text = "밀크티\r\n4,500원";
             this.Btn_Tea5.UseVisualStyleBackColor = true;
             this.Btn_Tea5.Click += new System.EventHandler(this.mainMenu_Click);
             // 
@@ -234,7 +234,7 @@ namespace Project_Kiosk
             this.Btn_Tea4.Size = new System.Drawing.Size(87, 60);
             this.Btn_Tea4.TabIndex = 6;
             this.Btn_Tea4.Tag = "로즈마리";
-            this.Btn_Tea4.Text = "로즈마리";
+            this.Btn_Tea4.Text = "로즈마리\r\n4,300원";
             this.Btn_Tea4.UseVisualStyleBackColor = true;
             this.Btn_Tea4.Click += new System.EventHandler(this.mainMenu_Click);
             // 
@@ -245,7 +245,7 @@ namespace Project_Kiosk
             this.Btn_juice1.Size = new System.Drawing.Size(87, 60);
             this.Btn_juice1.TabIndex = 0;
             this.Btn_juice1.Tag = "딸기주스";
-            this.Btn_juice1.Text = "딸기주스";
+            this.Btn_juice1.Text = "딸기주스\r\n5,000원";
             this.Btn_juice1.UseVisualStyleBackColor = true;
             this.Btn_juice1.Click += new System.EventHandler(this.mainMenu_Click);
             // 
@@ -255,8 +255,8 @@ namespace Project_Kiosk
             this.Btn_Tea2.Name = "Btn_Tea2";
             this.Btn_Tea2.Size = new System.Drawing.Size(87, 60);
             this.Btn_Tea2.TabIndex = 5;
-            this.Btn_Tea2.Tag = " 녹차";
-            this.Btn_Tea2.Text = " 녹차\r\n";
+            this.Btn_Tea2.Tag = "녹차";
+            this.Btn_Tea2.Text = " 녹차\r\n4,300원";
             this.Btn_Tea2.UseVisualStyleBackColor = true;
             this.Btn_Tea2.Click += new System.EventHandler(this.mainMenu_Click);
             // 
@@ -267,7 +267,7 @@ namespace Project_Kiosk
             this.Btn_juice2.Size = new System.Drawing.Size(87, 60);
             this.Btn_juice2.TabIndex = 1;
             this.Btn_juice2.Tag = "키위주스";
-            this.Btn_juice2.Text = "키위주스";
+            this.Btn_juice2.Text = "키위주스\r\n5,000원";
             this.Btn_juice2.UseVisualStyleBackColor = true;
             this.Btn_juice2.Click += new System.EventHandler(this.mainMenu_Click);
             // 
@@ -278,7 +278,7 @@ namespace Project_Kiosk
             this.Btn_juice3.Size = new System.Drawing.Size(87, 60);
             this.Btn_juice3.TabIndex = 3;
             this.Btn_juice3.Tag = "바나나주스";
-            this.Btn_juice3.Text = "바나나주스";
+            this.Btn_juice3.Text = "바나나주스\r\n5,000원";
             this.Btn_juice3.UseVisualStyleBackColor = true;
             this.Btn_juice3.Click += new System.EventHandler(this.mainMenu_Click);
             // 
@@ -289,7 +289,7 @@ namespace Project_Kiosk
             this.Btn_Tea1.Size = new System.Drawing.Size(87, 60);
             this.Btn_Tea1.TabIndex = 2;
             this.Btn_Tea1.Tag = "캐모마일";
-            this.Btn_Tea1.Text = "캐모마일";
+            this.Btn_Tea1.Text = "캐모마일\r\n4,300원";
             this.Btn_Tea1.UseVisualStyleBackColor = true;
             this.Btn_Tea1.Click += new System.EventHandler(this.mainMenu_Click);
             // 
@@ -317,7 +317,7 @@ namespace Project_Kiosk
             this.Btn_etc6.Size = new System.Drawing.Size(86, 58);
             this.Btn_etc6.TabIndex = 15;
             this.Btn_etc6.Tag = "유자 스파클링";
-            this.Btn_etc6.Text = "유자 스파클링\r\n";
+            this.Btn_etc6.Text = "유자\r\n스파클링\r\n5,500원";
             this.Btn_etc6.UseVisualStyleBackColor = true;
             this.Btn_etc6.Click += new System.EventHandler(this.mainMenu_Click);
             // 
@@ -328,7 +328,7 @@ namespace Project_Kiosk
             this.Btn_etc4.Size = new System.Drawing.Size(87, 60);
             this.Btn_etc4.TabIndex = 13;
             this.Btn_etc4.Tag = "망고스무디";
-            this.Btn_etc4.Text = "망고스무디";
+            this.Btn_etc4.Text = "망고스무디\r\n5,500원";
             this.Btn_etc4.UseVisualStyleBackColor = true;
             this.Btn_etc4.Click += new System.EventHandler(this.mainMenu_Click);
             // 
@@ -339,7 +339,7 @@ namespace Project_Kiosk
             this.Btn_etc1.Size = new System.Drawing.Size(86, 58);
             this.Btn_etc1.TabIndex = 10;
             this.Btn_etc1.Tag = "청포도 스파클링";
-            this.Btn_etc1.Text = "청포도 스파클링";
+            this.Btn_etc1.Text = "청포도 \r\n스파클링\r\n5,000원\r\n";
             this.Btn_etc1.UseVisualStyleBackColor = true;
             this.Btn_etc1.Click += new System.EventHandler(this.mainMenu_Click);
             // 
@@ -350,7 +350,7 @@ namespace Project_Kiosk
             this.Btn_etc5.Size = new System.Drawing.Size(87, 60);
             this.Btn_etc5.TabIndex = 14;
             this.Btn_etc5.Tag = "블루베리 스무디";
-            this.Btn_etc5.Text = "블루베리 스무디\r\n";
+            this.Btn_etc5.Text = "블루베리 \r\n스무디\r\n5,500원";
             this.Btn_etc5.UseVisualStyleBackColor = true;
             this.Btn_etc5.Click += new System.EventHandler(this.mainMenu_Click);
             // 
@@ -361,7 +361,7 @@ namespace Project_Kiosk
             this.Btn_etc3.Size = new System.Drawing.Size(87, 60);
             this.Btn_etc3.TabIndex = 12;
             this.Btn_etc3.Tag = "요거트스무디";
-            this.Btn_etc3.Text = "요거트스무디";
+            this.Btn_etc3.Text = "요거트스무디\r\n5,500원";
             this.Btn_etc3.UseVisualStyleBackColor = true;
             this.Btn_etc3.Click += new System.EventHandler(this.mainMenu_Click);
             // 
@@ -372,7 +372,7 @@ namespace Project_Kiosk
             this.Btn_etc2.Size = new System.Drawing.Size(86, 58);
             this.Btn_etc2.TabIndex = 11;
             this.Btn_etc2.Tag = "복숭아 아이스티";
-            this.Btn_etc2.Text = "복숭아 아이스티\r\n";
+            this.Btn_etc2.Text = "복숭아 \r\n아이스티\r\n4,000원";
             this.Btn_etc2.UseVisualStyleBackColor = true;
             this.Btn_etc2.Click += new System.EventHandler(this.mainMenu_Click);
             // 
@@ -383,7 +383,7 @@ namespace Project_Kiosk
             this.Btn_afogato.Size = new System.Drawing.Size(86, 58);
             this.Btn_afogato.TabIndex = 9;
             this.Btn_afogato.Tag = "아포가토";
-            this.Btn_afogato.Text = "아포가토";
+            this.Btn_afogato.Text = "아포가토\r\n4,500원";
             this.Btn_afogato.UseVisualStyleBackColor = true;
             this.Btn_afogato.Click += new System.EventHandler(this.mainMenu_Click);
             // 
@@ -406,7 +406,8 @@ namespace Project_Kiosk
             this.Btn_bagel.Name = "Btn_bagel";
             this.Btn_bagel.Size = new System.Drawing.Size(86, 58);
             this.Btn_bagel.TabIndex = 7;
-            this.Btn_bagel.Text = "베이글";
+            this.Btn_bagel.Tag = "베이글";
+            this.Btn_bagel.Text = "베이글\r\n3,000원";
             this.Btn_bagel.UseVisualStyleBackColor = true;
             this.Btn_bagel.Click += new System.EventHandler(this.mainMenu_Click);
             // 
@@ -417,7 +418,7 @@ namespace Project_Kiosk
             this.Btn_makarong.Size = new System.Drawing.Size(86, 58);
             this.Btn_makarong.TabIndex = 8;
             this.Btn_makarong.Tag = "마카롱";
-            this.Btn_makarong.Text = "마카롱";
+            this.Btn_makarong.Text = "마카롱\r\n2,500원";
             this.Btn_makarong.UseVisualStyleBackColor = true;
             this.Btn_makarong.Click += new System.EventHandler(this.mainMenu_Click);
             // 
@@ -428,7 +429,7 @@ namespace Project_Kiosk
             this.Btn_honey.Size = new System.Drawing.Size(86, 58);
             this.Btn_honey.TabIndex = 9;
             this.Btn_honey.Tag = "허니브레드";
-            this.Btn_honey.Text = "허니브레드";
+            this.Btn_honey.Text = "허니브레드\r\n5,500원";
             this.Btn_honey.UseVisualStyleBackColor = true;
             this.Btn_honey.Click += new System.EventHandler(this.mainMenu_Click);
             // 
@@ -553,7 +554,7 @@ namespace Project_Kiosk
             this.Btn_sizeUp.Size = new System.Drawing.Size(86, 58);
             this.Btn_sizeUp.TabIndex = 7;
             this.Btn_sizeUp.Tag = "사이즈업";
-            this.Btn_sizeUp.Text = "사이즈업";
+            this.Btn_sizeUp.Text = "사이즈업\r\n1,000원";
             this.Btn_sizeUp.UseVisualStyleBackColor = true;
             this.Btn_sizeUp.Click += new System.EventHandler(this.Btn_coffeeOption_Click);
             // 
@@ -578,7 +579,7 @@ namespace Project_Kiosk
             this.Btn_syrup3.Size = new System.Drawing.Size(86, 58);
             this.Btn_syrup3.TabIndex = 12;
             this.Btn_syrup3.Tag = "헤이즐넛시럽 추가";
-            this.Btn_syrup3.Text = "헤이즐넛시럽 추가";
+            this.Btn_syrup3.Text = "헤이즐넛시럽 추가\r\n1,000원";
             this.Btn_syrup3.UseVisualStyleBackColor = true;
             this.Btn_syrup3.Click += new System.EventHandler(this.Btn_coffeeOption_Click);
             // 
@@ -589,7 +590,7 @@ namespace Project_Kiosk
             this.Btn_syrup2.Size = new System.Drawing.Size(86, 58);
             this.Btn_syrup2.TabIndex = 11;
             this.Btn_syrup2.Tag = "바닐라시럽 추가";
-            this.Btn_syrup2.Text = "바닐라시럽 추가";
+            this.Btn_syrup2.Text = "바닐라시럽 추가\r\n1,000원";
             this.Btn_syrup2.UseVisualStyleBackColor = true;
             this.Btn_syrup2.Click += new System.EventHandler(this.Btn_coffeeOption_Click);
             // 
@@ -600,7 +601,7 @@ namespace Project_Kiosk
             this.Btn_addsyrup.Size = new System.Drawing.Size(86, 58);
             this.Btn_addsyrup.TabIndex = 10;
             this.Btn_addsyrup.Tag = "시럽 추가";
-            this.Btn_addsyrup.Text = "시럽 추가";
+            this.Btn_addsyrup.Text = "시럽 추가\r\n500원";
             this.Btn_addsyrup.UseVisualStyleBackColor = true;
             this.Btn_addsyrup.Click += new System.EventHandler(this.Btn_coffeeOption_Click);
             // 
@@ -631,7 +632,7 @@ namespace Project_Kiosk
             this.Btn_addshot.Size = new System.Drawing.Size(86, 58);
             this.Btn_addshot.TabIndex = 9;
             this.Btn_addshot.Tag = "샷추가";
-            this.Btn_addshot.Text = "샷추가";
+            this.Btn_addshot.Text = "샷추가\r\n500원";
             this.Btn_addshot.UseVisualStyleBackColor = true;
             this.Btn_addshot.Click += new System.EventHandler(this.Btn_coffeeOption_Click);
             // 
@@ -803,23 +804,23 @@ namespace Project_Kiosk
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            dataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
             this.dataGridView1.ColumnHeadersHeight = 27;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle18;
             this.dataGridView1.Location = new System.Drawing.Point(3, 67);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
