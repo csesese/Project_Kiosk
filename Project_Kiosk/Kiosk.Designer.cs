@@ -29,8 +29,8 @@ namespace Project_Kiosk
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.Panel_coffee = new System.Windows.Forms.Panel();
             this.Btn_vanila = new System.Windows.Forms.Button();
             this.Btn_espresso = new System.Windows.Forms.Button();
@@ -92,6 +92,9 @@ namespace Project_Kiosk
             this.total_Price = new System.Windows.Forms.Label();
             this.OrderList = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.panel_First = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btn_Go_Order = new System.Windows.Forms.Button();
             this.Panel_coffee.SuspendLayout();
             this.Panel_Juice.SuspendLayout();
             this.Panel_etc.SuspendLayout();
@@ -104,6 +107,7 @@ namespace Project_Kiosk
             this.Main.SuspendLayout();
             this.Panel_order.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.panel_First.SuspendLayout();
             this.SuspendLayout();
             // 
             // Panel_coffee
@@ -804,23 +808,23 @@ namespace Project_Kiosk
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle17.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            dataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.ColumnHeadersHeight = 27;
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView1.Location = new System.Drawing.Point(3, 67);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
@@ -828,12 +832,48 @@ namespace Project_Kiosk
             this.dataGridView1.Size = new System.Drawing.Size(489, 224);
             this.dataGridView1.TabIndex = 0;
             // 
+            // panel_First
+            // 
+            this.panel_First.BackColor = System.Drawing.SystemColors.Desktop;
+            this.panel_First.Controls.Add(this.btn_Go_Order);
+            this.panel_First.Controls.Add(this.label1);
+            this.panel_First.Location = new System.Drawing.Point(12, 27);
+            this.panel_First.Name = "panel_First";
+            this.panel_First.Size = new System.Drawing.Size(1031, 458);
+            this.panel_First.TabIndex = 20;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe Script", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.Window;
+            this.label1.Location = new System.Drawing.Point(256, 115);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(541, 106);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Coffee n Bread";
+            // 
+            // btn_Go_Order
+            // 
+            this.btn_Go_Order.BackColor = System.Drawing.SystemColors.HighlightText;
+            this.btn_Go_Order.Font = new System.Drawing.Font("문체부 제목 돋음체", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.btn_Go_Order.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.btn_Go_Order.Location = new System.Drawing.Point(449, 340);
+            this.btn_Go_Order.Margin = new System.Windows.Forms.Padding(0);
+            this.btn_Go_Order.Name = "btn_Go_Order";
+            this.btn_Go_Order.Size = new System.Drawing.Size(132, 66);
+            this.btn_Go_Order.TabIndex = 1;
+            this.btn_Go_Order.Text = "주문하기";
+            this.btn_Go_Order.UseVisualStyleBackColor = false;
+            this.btn_Go_Order.Click += new System.EventHandler(this.btn_Go_Order_Click);
+            // 
             // Kiosk
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.ClientSize = new System.Drawing.Size(1055, 517);
+            this.Controls.Add(this.panel_First);
             this.Controls.Add(this.Panel_order);
             this.Controls.Add(this.Main);
             this.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
@@ -854,6 +894,8 @@ namespace Project_Kiosk
             this.Panel_order.ResumeLayout(false);
             this.Panel_order.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.panel_First.ResumeLayout(false);
+            this.panel_First.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -921,6 +963,9 @@ namespace Project_Kiosk
         private System.Windows.Forms.Button Btn_pay_Card;
         private System.Windows.Forms.Button Btn_cart_cancel;
         private System.Windows.Forms.Button Btn_cart_modify;
+        private System.Windows.Forms.Panel panel_First;
+        private System.Windows.Forms.Button btn_Go_Order;
+        private System.Windows.Forms.Label label1;
     }
 }
 

@@ -28,6 +28,7 @@ namespace Project_Kiosk
         int data_num;// 행 개수(cart list table)
         string order_Time;// 주문시간 
         int 샷추가; // 샷이 추가된 개수
+        int 시럽추가;//시럽이 추가된 개수
 
 
         public Kiosk()
@@ -187,6 +188,7 @@ namespace Project_Kiosk
             each_price = 0;
             count.Value = 1;
             샷추가=0;
+            시럽추가 = 0;
         }
         #endregion
 
@@ -423,11 +425,17 @@ namespace Project_Kiosk
             Button Abtn = sender as Button;
             //this.menu_price_Name = Abtn.Text;
             this.menu_price_Name = Abtn.Tag.ToString();
-                        
+
 
             if (menu_price_Name.Equals("샷추가"))
             {
-                this.샷추가++;               
+                this.샷추가++;
+            }
+            else if (menu_price_Name.Equals("바닐라시럽 추가") ||
+                    menu_price_Name.Equals("헤이즐넛시럽 추가") ||
+                    menu_price_Name.Equals("시럽 추가"))
+            {
+                this.시럽추가++;
             }
 
             this.option_price += Click_Price();//옵션 price 
@@ -449,6 +457,11 @@ namespace Project_Kiosk
                     if (샷추가 > 3)
                     {
                         MessageBox.Show("샷추가는 최대 3번 가능합니다.");                       
+                        return;
+                    }
+                    else if(시럽추가 > 3)
+                    {
+                        MessageBox.Show("시럽추가는 최대 3번 가능합니다.");
                         return;
                     }
                     else
@@ -476,9 +489,9 @@ namespace Project_Kiosk
         {
             Option = null;
             option_name.Text = "+";
-
             option_price = 0;
-
+            샷추가 = 0;
+            시럽추가 = 0;
         }
         #endregion
 
@@ -597,12 +610,24 @@ namespace Project_Kiosk
                     ((DataTable)dataGridView1.DataSource).Rows.Clear(); // 화면상의 datagird 행들 삭제
 
                     초기화();
+
+                    DialogResult drOrder = MessageBox.Show("주문을 계속 하시겠습니까?", "주문", MessageBoxButtons.OKCancel);
+
+                    if (drOrder == DialogResult.Cancel)
+                    {
+                        panel_First.Visible = true;
+
+                        Panel_coffee.Visible = true;
+                        Panel_Juice.Visible = false;
+                        Panel_etc.Visible = false;
+                        Panel_bakery.Visible = false;
+                    }
+
                 }
                 else
                 {
                     DialogResult Repay = MessageBox.Show("결재가 취소 되었습니다. 다시 결재 진행할까요? ", "결재 취소", MessageBoxButtons.OKCancel);
                     if (Repay == DialogResult.OK)
-
                     {
                         //Cart -> order_Detail  
                         CartToOrderdetail();
@@ -630,8 +655,13 @@ namespace Project_Kiosk
             //종료버튼 클릭시, 장바구니 다 삭제 
             DeleteCart();
         }
+
+        private void btn_Go_Order_Click(object sender, EventArgs e)
+        {
+            panel_First.Visible = false;
+        }
         #endregion
-        
+
         //----------------------------------------------------------------------------------------------
 
 
