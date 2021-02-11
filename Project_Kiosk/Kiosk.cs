@@ -27,6 +27,7 @@ namespace Project_Kiosk
         string orderNum; //주문 번호
         int data_num;// 행 개수(cart list table)
         string order_Time;// 주문시간 
+        int 샷추가; // 샷이 추가된 개수
 
 
         public Kiosk()
@@ -53,13 +54,17 @@ namespace Project_Kiosk
             catch (ArgumentNullException ane)
             {
                 MessageBox.Show(ane.Message, "DataGridView_Load Error");
-            }
+            }            
         }
-
 
         //카테고리별 관련 panel 뜸
         private void Btn_category_Click(object sender, EventArgs e)
         {
+            if (Panel_add.Visible == true)
+            {
+                Panel_add.Visible = false;
+                초기화();
+            }
 
             Panel_coffee.Visible = false;
             Panel_Juice.Visible = false;
@@ -147,6 +152,18 @@ namespace Project_Kiosk
 
         }
 
+        //공통메서드 : 초기화 
+        public void 초기화()
+        {
+            option_name.Text = "+";
+            Option = null;
+
+            option_price = 0;
+            each_price = 0;
+            count.Value = 1;
+            샷추가=0;
+        }
+
         //주문 전체 취소 
         private void Btn_Cancel_Click(object sender, EventArgs e)
         {
@@ -170,6 +187,8 @@ namespace Project_Kiosk
             }
         }
 
+        
+
         //++++++++++++++++++++++++++++++++++++++++++++++++++++
         #region 메인메뉴 선택 btn_click
         //1.메인메뉴 선택-> 선택옵션 panel뜸
@@ -187,16 +206,21 @@ namespace Project_Kiosk
             Panel_add_j.Visible = false;
             Panel_add_t.Visible = false;
 
-
+            
             switch (Mbtn.Text)
             {
                 //1 coffee
-                case "바닐라 라떼":
-                case "에스프레소":
+                case "바닐라 라떼":               
                 case "카푸치노":
                 case "카페모카":
                 case "카페라떼":
                 case "아메리카노":
+                    Panel_add_c.Visible = true;
+                    Panel_add_j.Visible = false;
+                    Panel_add_t.Visible = false;
+                    break;
+               case "에스프레소":
+                    IceHot = "-";
                     Panel_add_c.Visible = true;
                     Panel_add_j.Visible = false;
                     Panel_add_t.Visible = false;
@@ -250,13 +274,7 @@ namespace Project_Kiosk
         private void Btn_back_Click(object sender, EventArgs e)
         {
             Panel_add.Visible = false;
-
-            option_name.Text = "+";
-            Option = null;
-
-            option_price = 0;
-            each_price = 0;
-
+            초기화();
         }
 
 
@@ -288,26 +306,22 @@ namespace Project_Kiosk
  
             int sum = ((main_price + option_price) * surang);
 
-            /*string sql = "insert into Cart(menu_ID,count,menu_option,IceHot,each_price)" +
-                        " values ('" + Menu + "','" + surang + "','" + Option + "','" + IceHot + "','" + sum + "')";*/
+
             string sql = "sp_add_toCart '" + Menu + "','" + surang + "','" + Option + "','" + IceHot + "','" + sum + "' ";
             DBHelper.ExecuteNonQuery(sql);
             this.total_price += sum;
 
             //주문담기 후 수량 초기화
-            count.Value = 1;
-            Option = null;
-            this.IceHot = null;
-            each_price = 0;
+
+            초기화();
+            this.IceHot = null;           
             main_price = 0;
-            option_price = 0;
+           
 
 
             //---------장부구니 list 보여주기-------------
             DataTable dtOut = null;
-
-            /*string cart_sql = "select c.card_Serial as No , c.IceHot as Type, c.menu_ID as 메뉴, c.menu_option as 선택사항 , c.count as 개수, replace(CONVERT(VARCHAR, CONVERT(money, c.each_price), 1), '.00', '') as 가격 " +
-                "from Cart c left outer join Menu m on c.menu_ID = m.menu ";*/
+          
             string cart_sql = "show_CartList";
             int Out = DBHelper.ExecuteReader(cart_sql,out dtOut);
             dataGridView1.DataSource = dtOut;
@@ -353,6 +367,9 @@ namespace Project_Kiosk
 
             dataGridView1.RowHeadersVisible = false; //첫 열 지우기     
 
+            Panel_add.Visible = false;
+
+
         }
         #endregion
         //END-------------------------------------------------
@@ -365,6 +382,12 @@ namespace Project_Kiosk
 
             Button Abtn = sender as Button;
             this.menu_price_Name = Abtn.Text;
+                        
+
+            if (menu_price_Name.Equals("샷추가"))
+            {
+                this.샷추가++;               
+            }
 
             this.option_price += Click_Price();//옵션 price 
 
@@ -382,10 +405,17 @@ namespace Project_Kiosk
                 }
                 else
                 {
-                    this.str = str + "+" + Abtn.Text;
-                    option_name.Text += "+" + Abtn.Text;
-                }
-                         
+                    if (샷추가 > 3)
+                    {
+                        MessageBox.Show("샷추가는 최대 3번 가능합니다.");                       
+                        return;
+                    }
+                    else
+                    {
+                        this.str = str + "+" + Abtn.Text;
+                        option_name.Text += "+" + Abtn.Text;
+                    }                    
+                }                         
             }
             this.Option = str.Trim();
         }
@@ -438,44 +468,53 @@ namespace Project_Kiosk
         //장바구니에서 개수 변경 하기
         private void Btn_cart_modify_Click(object sender, EventArgs e)
         {
-            //1 선택한 행의 card_serial no 에 원래 개수 저장
-            string selected = dataGridView1.CurrentRow.Cells["No"].Value.ToString();
-            int gaesu = 0;
-            int gagaek = 0;
-
-            string sql = "select count ,each_price from Cart where card_Serial ='" + selected + "'";
-
-            DataTable logDt = new DataTable();
-            int nRet = DBHelper.ExecuteReader(sql, out logDt);
-            
-            if(nRet ==0)
+            //장바구니에 상품이 없을 때 개수변경 불가
+            if (dataGridView1.Rows.Count == 0)
             {
+                
+                MessageBox.Show("개수변경 할 상품이 없습니다.");
+            }
+            else
+            {
+                
+                //1 선택한 행의 card_serial no 에 원래 개수 저장
+                string selected = dataGridView1.CurrentRow.Cells["No"].Value.ToString();
+                int gaesu = 0;
+                int gagaek = 0;
+
+                string sql = "select count ,each_price from Cart where card_Serial ='" + selected + "'";
+
+                DataTable logDt = new DataTable();
+                int nRet = DBHelper.ExecuteReader(sql, out logDt);
+
+                if (nRet == 0)
+                {
                     string c = logDt.Rows[0]["count"].ToString();
                     string ep = logDt.Rows[0]["each_price"].ToString();
 
                     gaesu = Convert.ToInt32(c);// 변경 전 개수
                     gagaek = Convert.ToInt32(ep); // 변경 전 가격 
-                
+
+                }
+
+
+                //2 변경된 개수 확인
+                string selected_gaesu = dataGridView1.CurrentRow.Cells["개수"].Value.ToString();
+                int changed_gaesu = Convert.ToInt32(selected_gaesu);
+
+                //3 계산 : 변경된 개수에 맞는 가격
+                int sum = (gagaek / gaesu) * changed_gaesu;
+
+                //4 db변경 
+                dataGridView1.CurrentRow.Cells[5].Value = sum;
+
+                string sql2 = "update Cart set count = '" + changed_gaesu + "', each_price = '" + sum + "' where card_Serial ='" + selected + "'";
+                DBHelper.ExecuteNonQuery(sql2);
+
+                //5 최종 가격 변경 
+                this.total_price = total_sum();
+                Total_price_label.Text = string.Format("{0:n0}", total_price) + " 원";
             }
-
-
-            //2 변경된 개수 확인
-            string selected_gaesu = dataGridView1.CurrentRow.Cells["개수"].Value.ToString();
-            int changed_gaesu = Convert.ToInt32(selected_gaesu);
-
-            //3 계산 : 변경된 개수에 맞는 가격
-            int sum = (gagaek / gaesu) * changed_gaesu;
-
-            //4 db변경 
-            dataGridView1.CurrentRow.Cells[5].Value = sum;
-
-            string sql2 = "update Cart set count = '" + changed_gaesu + "', each_price = '" + sum + "' where card_Serial ='" + selected + "'";
-            DBHelper.ExecuteNonQuery(sql2);
-
-            //5 최종 가격 변경 
-            this.total_price = total_sum();
-            Total_price_label.Text = string.Format("{0:n0}", total_price) + " 원";
-            
         }
 
         #endregion
@@ -486,52 +525,66 @@ namespace Project_Kiosk
         //Pay 
         private void Btn_pay_Card_Click(object sender, EventArgs e)
         {
-            this.data_num = ((DataTable)dataGridView1.DataSource).Rows.Count; //행 개수            
-
-            this. order_Time = DateTime.Now.ToString("yyyyMMddHHmmss");
-            this.orderNum = "Ord" + dataGridView1.Rows[0].Cells[0].Value.ToString() + "#" + order_Time; //주문 번호
-
-            DialogResult dr = MessageBox.Show("카드를 넣어주세요.", "결재 진행 중", MessageBoxButtons.OKCancel);
-
-            if (dr == DialogResult.OK)
+            if (dataGridView1.Rows.Count == 0)
             {
-                //Cart -> order_Detail  
-                CartToOrderdetail();
-                //-------------주문시작하면 cart에 있는 정보 삭제 
-                DeleteCart();
-                MessageBox.Show("결재가 완료 되었습니다.");
-                Panel_add.Visible = false;
-                ((DataTable)dataGridView1.DataSource).Rows.Clear(); // 화면상의 datagird 행들 삭제
+                MessageBox.Show("결재할 상품이 없습니다.");
             }
-            else
-            {
-                DialogResult Repay = MessageBox.Show("결재가 취소 되었습니다. 다시 결재 진행할까요? ", "결재 취소", MessageBoxButtons.OKCancel);
-                if (Repay == DialogResult.OK)
+            else { 
+                this.data_num = ((DataTable)dataGridView1.DataSource).Rows.Count; //행 개수            
 
+                this. order_Time = DateTime.Now.ToString("yyyyMMddHHmmss");
+                this.orderNum = "Ord" + dataGridView1.Rows[0].Cells[0].Value.ToString() + "#" + order_Time; //주문 번호
+
+                DialogResult dr = MessageBox.Show("카드를 넣어주세요.", "결재 진행 중", MessageBoxButtons.OKCancel);
+
+                if (dr == DialogResult.OK)
                 {
                     //Cart -> order_Detail  
                     CartToOrderdetail();
-                    //-------------주문시작하면 cart에 있는 정보 삭제   
+                    //-------------주문시작하면 cart에 있는 정보 삭제 
                     DeleteCart();
                     MessageBox.Show("결재가 완료 되었습니다.");
                     Panel_add.Visible = false;
                     ((DataTable)dataGridView1.DataSource).Rows.Clear(); // 화면상의 datagird 행들 삭제
+
+                    초기화();
                 }
                 else
                 {
-                    MessageBox.Show("주문이 취소되었습니다.");
-                    DeleteCart();
+                    DialogResult Repay = MessageBox.Show("결재가 취소 되었습니다. 다시 결재 진행할까요? ", "결재 취소", MessageBoxButtons.OKCancel);
+                    if (Repay == DialogResult.OK)
 
-                    Panel_add.Visible = false;
-                    ((DataTable)dataGridView1.DataSource).Rows.Clear(); // 화면상의 datagird 행들 삭제
+                    {
+                        //Cart -> order_Detail  
+                        CartToOrderdetail();
+                        //-------------주문시작하면 cart에 있는 정보 삭제   
+                        DeleteCart();
+                        MessageBox.Show("결재가 완료 되었습니다.");
+                        Panel_add.Visible = false;
+                        ((DataTable)dataGridView1.DataSource).Rows.Clear(); // 화면상의 datagird 행들 삭제
+                    }
+                    else
+                    {
+                        MessageBox.Show("주문이 취소되었습니다.");
+                        DeleteCart();
 
+                        Panel_add.Visible = false;
+                        ((DataTable)dataGridView1.DataSource).Rows.Clear(); // 화면상의 datagird 행들 삭제
+
+                    }
                 }
             }
         }
+
+        private void close_Confirm(object sender, FormClosingEventArgs e)
+        {
+            //종료버튼 클릭시, 장바구니 다 삭제 
+            DeleteCart();
+        }
         #endregion
         //END-------------------------------------------------
-        
-        
+
+
     }
     
 }

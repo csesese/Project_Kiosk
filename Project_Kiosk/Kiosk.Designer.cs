@@ -76,7 +76,7 @@ namespace Project_Kiosk
             this.Btn_addsyrup = new System.Windows.Forms.Button();
             this.Btn_hot = new System.Windows.Forms.Button();
             this.Btn_ice = new System.Windows.Forms.Button();
-            this.Bnt_addshot = new System.Windows.Forms.Button();
+            this.Btn_addshot = new System.Windows.Forms.Button();
             this.option_name = new System.Windows.Forms.Label();
             this.Btn_optionCancel = new System.Windows.Forms.Button();
             this.count = new System.Windows.Forms.NumericUpDown();
@@ -127,7 +127,8 @@ namespace Project_Kiosk
             this.Btn_vanila.Name = "Btn_vanila";
             this.Btn_vanila.Size = new System.Drawing.Size(87, 60);
             this.Btn_vanila.TabIndex = 5;
-            this.Btn_vanila.Text = "바닐라 라떼";
+            this.Btn_vanila.Tag = "바닐라 라떼";
+            this.Btn_vanila.Text = "바닐라 라떼\r\n";
             this.Btn_vanila.UseVisualStyleBackColor = true;
             this.Btn_vanila.Click += new System.EventHandler(this.mainMenu_Click);
             // 
@@ -137,6 +138,7 @@ namespace Project_Kiosk
             this.Btn_espresso.Name = "Btn_espresso";
             this.Btn_espresso.Size = new System.Drawing.Size(87, 60);
             this.Btn_espresso.TabIndex = 4;
+            this.Btn_espresso.Tag = "에스프레소";
             this.Btn_espresso.Text = "에스프레소";
             this.Btn_espresso.UseVisualStyleBackColor = true;
             this.Btn_espresso.Click += new System.EventHandler(this.mainMenu_Click);
@@ -147,6 +149,7 @@ namespace Project_Kiosk
             this.Btn_cappuccino.Name = "Btn_cappuccino";
             this.Btn_cappuccino.Size = new System.Drawing.Size(87, 60);
             this.Btn_cappuccino.TabIndex = 3;
+            this.Btn_cappuccino.Tag = "카푸치노";
             this.Btn_cappuccino.Text = "카푸치노";
             this.Btn_cappuccino.UseVisualStyleBackColor = true;
             this.Btn_cappuccino.Click += new System.EventHandler(this.mainMenu_Click);
@@ -157,6 +160,7 @@ namespace Project_Kiosk
             this.Btn_moca.Name = "Btn_moca";
             this.Btn_moca.Size = new System.Drawing.Size(87, 60);
             this.Btn_moca.TabIndex = 2;
+            this.Btn_moca.Tag = "카페모카";
             this.Btn_moca.Text = "카페모카";
             this.Btn_moca.UseVisualStyleBackColor = true;
             this.Btn_moca.Click += new System.EventHandler(this.mainMenu_Click);
@@ -167,6 +171,7 @@ namespace Project_Kiosk
             this.Btn_latte.Name = "Btn_latte";
             this.Btn_latte.Size = new System.Drawing.Size(87, 60);
             this.Btn_latte.TabIndex = 1;
+            this.Btn_latte.Tag = "카페라떼";
             this.Btn_latte.Text = "카페라떼";
             this.Btn_latte.UseVisualStyleBackColor = true;
             this.Btn_latte.Click += new System.EventHandler(this.mainMenu_Click);
@@ -177,6 +182,7 @@ namespace Project_Kiosk
             this.Btn_Americano.Name = "Btn_Americano";
             this.Btn_Americano.Size = new System.Drawing.Size(87, 60);
             this.Btn_Americano.TabIndex = 0;
+            this.Btn_Americano.Tag = "아메리카노";
             this.Btn_Americano.Text = "아메리카노";
             this.Btn_Americano.UseVisualStyleBackColor = true;
             this.Btn_Americano.Click += new System.EventHandler(this.mainMenu_Click);
@@ -205,6 +211,7 @@ namespace Project_Kiosk
             this.Btn_Tea3.Name = "Btn_Tea3";
             this.Btn_Tea3.Size = new System.Drawing.Size(87, 60);
             this.Btn_Tea3.TabIndex = 4;
+            this.Btn_Tea3.Tag = "얼그레이";
             this.Btn_Tea3.Text = "얼그레이";
             this.Btn_Tea3.UseVisualStyleBackColor = true;
             this.Btn_Tea3.Click += new System.EventHandler(this.mainMenu_Click);
@@ -215,6 +222,7 @@ namespace Project_Kiosk
             this.Btn_Tea5.Name = "Btn_Tea5";
             this.Btn_Tea5.Size = new System.Drawing.Size(87, 60);
             this.Btn_Tea5.TabIndex = 7;
+            this.Btn_Tea5.Tag = "밀크티";
             this.Btn_Tea5.Text = "밀크티";
             this.Btn_Tea5.UseVisualStyleBackColor = true;
             this.Btn_Tea5.Click += new System.EventHandler(this.mainMenu_Click);
@@ -225,6 +233,7 @@ namespace Project_Kiosk
             this.Btn_Tea4.Name = "Btn_Tea4";
             this.Btn_Tea4.Size = new System.Drawing.Size(87, 60);
             this.Btn_Tea4.TabIndex = 6;
+            this.Btn_Tea4.Tag = "로즈마리";
             this.Btn_Tea4.Text = "로즈마리";
             this.Btn_Tea4.UseVisualStyleBackColor = true;
             this.Btn_Tea4.Click += new System.EventHandler(this.mainMenu_Click);
@@ -235,6 +244,7 @@ namespace Project_Kiosk
             this.Btn_juice1.Name = "Btn_juice1";
             this.Btn_juice1.Size = new System.Drawing.Size(87, 60);
             this.Btn_juice1.TabIndex = 0;
+            this.Btn_juice1.Tag = "딸기주스";
             this.Btn_juice1.Text = "딸기주스";
             this.Btn_juice1.UseVisualStyleBackColor = true;
             this.Btn_juice1.Click += new System.EventHandler(this.mainMenu_Click);
@@ -245,7 +255,8 @@ namespace Project_Kiosk
             this.Btn_Tea2.Name = "Btn_Tea2";
             this.Btn_Tea2.Size = new System.Drawing.Size(87, 60);
             this.Btn_Tea2.TabIndex = 5;
-            this.Btn_Tea2.Text = "녹차";
+            this.Btn_Tea2.Tag = " 녹차";
+            this.Btn_Tea2.Text = " 녹차\r\n";
             this.Btn_Tea2.UseVisualStyleBackColor = true;
             this.Btn_Tea2.Click += new System.EventHandler(this.mainMenu_Click);
             // 
@@ -255,6 +266,7 @@ namespace Project_Kiosk
             this.Btn_juice2.Name = "Btn_juice2";
             this.Btn_juice2.Size = new System.Drawing.Size(87, 60);
             this.Btn_juice2.TabIndex = 1;
+            this.Btn_juice2.Tag = "키위주스";
             this.Btn_juice2.Text = "키위주스";
             this.Btn_juice2.UseVisualStyleBackColor = true;
             this.Btn_juice2.Click += new System.EventHandler(this.mainMenu_Click);
@@ -265,6 +277,7 @@ namespace Project_Kiosk
             this.Btn_juice3.Name = "Btn_juice3";
             this.Btn_juice3.Size = new System.Drawing.Size(87, 60);
             this.Btn_juice3.TabIndex = 3;
+            this.Btn_juice3.Tag = "바나나주스";
             this.Btn_juice3.Text = "바나나주스";
             this.Btn_juice3.UseVisualStyleBackColor = true;
             this.Btn_juice3.Click += new System.EventHandler(this.mainMenu_Click);
@@ -275,6 +288,7 @@ namespace Project_Kiosk
             this.Btn_Tea1.Name = "Btn_Tea1";
             this.Btn_Tea1.Size = new System.Drawing.Size(87, 60);
             this.Btn_Tea1.TabIndex = 2;
+            this.Btn_Tea1.Tag = "캐모마일";
             this.Btn_Tea1.Text = "캐모마일";
             this.Btn_Tea1.UseVisualStyleBackColor = true;
             this.Btn_Tea1.Click += new System.EventHandler(this.mainMenu_Click);
@@ -302,7 +316,8 @@ namespace Project_Kiosk
             this.Btn_etc6.Name = "Btn_etc6";
             this.Btn_etc6.Size = new System.Drawing.Size(86, 58);
             this.Btn_etc6.TabIndex = 15;
-            this.Btn_etc6.Text = "유자 스파클링";
+            this.Btn_etc6.Tag = "유자 스파클링";
+            this.Btn_etc6.Text = "유자 스파클링\r\n";
             this.Btn_etc6.UseVisualStyleBackColor = true;
             this.Btn_etc6.Click += new System.EventHandler(this.mainMenu_Click);
             // 
@@ -312,6 +327,7 @@ namespace Project_Kiosk
             this.Btn_etc4.Name = "Btn_etc4";
             this.Btn_etc4.Size = new System.Drawing.Size(87, 60);
             this.Btn_etc4.TabIndex = 13;
+            this.Btn_etc4.Tag = "망고스무디";
             this.Btn_etc4.Text = "망고스무디";
             this.Btn_etc4.UseVisualStyleBackColor = true;
             this.Btn_etc4.Click += new System.EventHandler(this.mainMenu_Click);
@@ -322,6 +338,7 @@ namespace Project_Kiosk
             this.Btn_etc1.Name = "Btn_etc1";
             this.Btn_etc1.Size = new System.Drawing.Size(86, 58);
             this.Btn_etc1.TabIndex = 10;
+            this.Btn_etc1.Tag = "청포도 스파클링";
             this.Btn_etc1.Text = "청포도 스파클링";
             this.Btn_etc1.UseVisualStyleBackColor = true;
             this.Btn_etc1.Click += new System.EventHandler(this.mainMenu_Click);
@@ -332,7 +349,8 @@ namespace Project_Kiosk
             this.Btn_etc5.Name = "Btn_etc5";
             this.Btn_etc5.Size = new System.Drawing.Size(87, 60);
             this.Btn_etc5.TabIndex = 14;
-            this.Btn_etc5.Text = "블루베리 스무디";
+            this.Btn_etc5.Tag = "블루베리 스무디";
+            this.Btn_etc5.Text = "블루베리 스무디\r\n";
             this.Btn_etc5.UseVisualStyleBackColor = true;
             this.Btn_etc5.Click += new System.EventHandler(this.mainMenu_Click);
             // 
@@ -342,6 +360,7 @@ namespace Project_Kiosk
             this.Btn_etc3.Name = "Btn_etc3";
             this.Btn_etc3.Size = new System.Drawing.Size(87, 60);
             this.Btn_etc3.TabIndex = 12;
+            this.Btn_etc3.Tag = "요거트스무디";
             this.Btn_etc3.Text = "요거트스무디";
             this.Btn_etc3.UseVisualStyleBackColor = true;
             this.Btn_etc3.Click += new System.EventHandler(this.mainMenu_Click);
@@ -352,7 +371,8 @@ namespace Project_Kiosk
             this.Btn_etc2.Name = "Btn_etc2";
             this.Btn_etc2.Size = new System.Drawing.Size(86, 58);
             this.Btn_etc2.TabIndex = 11;
-            this.Btn_etc2.Text = "복숭아 아이스티";
+            this.Btn_etc2.Tag = "복숭아 아이스티";
+            this.Btn_etc2.Text = "복숭아 아이스티\r\n";
             this.Btn_etc2.UseVisualStyleBackColor = true;
             this.Btn_etc2.Click += new System.EventHandler(this.mainMenu_Click);
             // 
@@ -362,6 +382,7 @@ namespace Project_Kiosk
             this.Btn_afogato.Name = "Btn_afogato";
             this.Btn_afogato.Size = new System.Drawing.Size(86, 58);
             this.Btn_afogato.TabIndex = 9;
+            this.Btn_afogato.Tag = "아포가토";
             this.Btn_afogato.Text = "아포가토";
             this.Btn_afogato.UseVisualStyleBackColor = true;
             this.Btn_afogato.Click += new System.EventHandler(this.mainMenu_Click);
@@ -395,6 +416,7 @@ namespace Project_Kiosk
             this.Btn_makarong.Name = "Btn_makarong";
             this.Btn_makarong.Size = new System.Drawing.Size(86, 58);
             this.Btn_makarong.TabIndex = 8;
+            this.Btn_makarong.Tag = "마카롱";
             this.Btn_makarong.Text = "마카롱";
             this.Btn_makarong.UseVisualStyleBackColor = true;
             this.Btn_makarong.Click += new System.EventHandler(this.mainMenu_Click);
@@ -405,6 +427,7 @@ namespace Project_Kiosk
             this.Btn_honey.Name = "Btn_honey";
             this.Btn_honey.Size = new System.Drawing.Size(86, 58);
             this.Btn_honey.TabIndex = 9;
+            this.Btn_honey.Tag = "허니브레드";
             this.Btn_honey.Text = "허니브레드";
             this.Btn_honey.UseVisualStyleBackColor = true;
             this.Btn_honey.Click += new System.EventHandler(this.mainMenu_Click);
@@ -529,6 +552,7 @@ namespace Project_Kiosk
             this.Btn_sizeUp.Name = "Btn_sizeUp";
             this.Btn_sizeUp.Size = new System.Drawing.Size(86, 58);
             this.Btn_sizeUp.TabIndex = 7;
+            this.Btn_sizeUp.Tag = "사이즈업";
             this.Btn_sizeUp.Text = "사이즈업";
             this.Btn_sizeUp.UseVisualStyleBackColor = true;
             this.Btn_sizeUp.Click += new System.EventHandler(this.Btn_coffeeOption_Click);
@@ -540,7 +564,7 @@ namespace Project_Kiosk
             this.Panel_add_c.Controls.Add(this.Btn_addsyrup);
             this.Panel_add_c.Controls.Add(this.Btn_hot);
             this.Panel_add_c.Controls.Add(this.Btn_ice);
-            this.Panel_add_c.Controls.Add(this.Bnt_addshot);
+            this.Panel_add_c.Controls.Add(this.Btn_addshot);
             this.Panel_add_c.Location = new System.Drawing.Point(9, 99);
             this.Panel_add_c.Name = "Panel_add_c";
             this.Panel_add_c.Size = new System.Drawing.Size(341, 162);
@@ -553,6 +577,7 @@ namespace Project_Kiosk
             this.Btn_syrup3.Name = "Btn_syrup3";
             this.Btn_syrup3.Size = new System.Drawing.Size(86, 58);
             this.Btn_syrup3.TabIndex = 12;
+            this.Btn_syrup3.Tag = "헤이즐넛시럽 추가";
             this.Btn_syrup3.Text = "헤이즐넛시럽 추가";
             this.Btn_syrup3.UseVisualStyleBackColor = true;
             this.Btn_syrup3.Click += new System.EventHandler(this.Btn_coffeeOption_Click);
@@ -563,6 +588,7 @@ namespace Project_Kiosk
             this.Btn_syrup2.Name = "Btn_syrup2";
             this.Btn_syrup2.Size = new System.Drawing.Size(86, 58);
             this.Btn_syrup2.TabIndex = 11;
+            this.Btn_syrup2.Tag = "바닐라시럽 추가";
             this.Btn_syrup2.Text = "바닐라시럽 추가";
             this.Btn_syrup2.UseVisualStyleBackColor = true;
             this.Btn_syrup2.Click += new System.EventHandler(this.Btn_coffeeOption_Click);
@@ -573,6 +599,7 @@ namespace Project_Kiosk
             this.Btn_addsyrup.Name = "Btn_addsyrup";
             this.Btn_addsyrup.Size = new System.Drawing.Size(86, 58);
             this.Btn_addsyrup.TabIndex = 10;
+            this.Btn_addsyrup.Tag = "시럽 추가";
             this.Btn_addsyrup.Text = "시럽 추가";
             this.Btn_addsyrup.UseVisualStyleBackColor = true;
             this.Btn_addsyrup.Click += new System.EventHandler(this.Btn_coffeeOption_Click);
@@ -597,15 +624,16 @@ namespace Project_Kiosk
             this.Btn_ice.UseVisualStyleBackColor = true;
             this.Btn_ice.Click += new System.EventHandler(this.Btn_IceHot_Click);
             // 
-            // Bnt_addshot
+            // Btn_addshot
             // 
-            this.Bnt_addshot.Location = new System.Drawing.Point(238, 10);
-            this.Bnt_addshot.Name = "Bnt_addshot";
-            this.Bnt_addshot.Size = new System.Drawing.Size(86, 58);
-            this.Bnt_addshot.TabIndex = 9;
-            this.Bnt_addshot.Text = "샷추가";
-            this.Bnt_addshot.UseVisualStyleBackColor = true;
-            this.Bnt_addshot.Click += new System.EventHandler(this.Btn_coffeeOption_Click);
+            this.Btn_addshot.Location = new System.Drawing.Point(238, 10);
+            this.Btn_addshot.Name = "Btn_addshot";
+            this.Btn_addshot.Size = new System.Drawing.Size(86, 58);
+            this.Btn_addshot.TabIndex = 9;
+            this.Btn_addshot.Tag = "샷추가";
+            this.Btn_addshot.Text = "샷추가";
+            this.Btn_addshot.UseVisualStyleBackColor = true;
+            this.Btn_addshot.Click += new System.EventHandler(this.Btn_coffeeOption_Click);
             // 
             // option_name
             // 
@@ -810,6 +838,7 @@ namespace Project_Kiosk
             this.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.Name = "Kiosk";
             this.Text = "Kiosk";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.close_Confirm);
             this.Panel_coffee.ResumeLayout(false);
             this.Panel_Juice.ResumeLayout(false);
             this.Panel_etc.ResumeLayout(false);
@@ -866,7 +895,7 @@ namespace Project_Kiosk
         private System.Windows.Forms.Panel Panel_add;
         private System.Windows.Forms.Button Btn_hot;
         private System.Windows.Forms.Button Btn_ice;
-        private System.Windows.Forms.Button Bnt_addshot;
+        private System.Windows.Forms.Button Btn_addshot;
         private System.Windows.Forms.Button Btn_cart;
         private System.Windows.Forms.Button Btn_back;
         private System.Windows.Forms.Button Btn_syrup3;
